@@ -1,4 +1,5 @@
-node_modules/
-dist/
-.netlify/
-*.bak
+node_modules
+dist
+.netlify
+.vercel
+.DS_Store

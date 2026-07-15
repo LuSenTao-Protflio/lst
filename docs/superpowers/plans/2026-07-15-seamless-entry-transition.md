@@ -2,15 +2,16 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Replace the detached entry interstitial with a fast charcoal takeover that visually continues into the portfolio hero.
+**Goal:** Replace the detached entry interstitial with a fast blurred preview of the actual portfolio Hero background.
 
-**Architecture:** Keep the existing `EntryTransition` component and shared entry trigger. Change only its GSAP timeline and overlay reveal styles so navigation happens at the end of a roughly 0.65-second transform-based wipe with no trailing hold.
+**Architecture:** Keep the existing `EntryTransition` component and shared entry trigger. Render the existing `LightRays` component behind the transition copy and add a dedicated glass layer over it, preserving the roughly 0.65-second transform-based wipe and immediate navigation.
 
 **Tech Stack:** React, GSAP 3.15, CSS, Vite
 
 ## Global Constraints
 
-- Use `var(--deep)` for the overlay so it exactly matches the portfolio hero.
+- Reuse the portfolio Hero's `LightRays` configuration over `var(--deep)`.
+- Place an approximately `20px` blurred glass layer between the rays and transition copy.
 - Keep acid-yellow transition typography.
 - Keep the shared click/wheel trigger lock and reduced-motion bypass unchanged.
 - Do not add ScrollTrigger or an exit animation.
@@ -42,27 +43,32 @@ Expected: the old 0.72-second character tween and 0.12-second trailing hold are 
 
 Change the root animation to reveal from `yPercent: 100` over `0.26` seconds, overlap a `0.38` second character animation with `0.035` stagger, and overlap the English line within the same timeline. Remove the empty trailing tween so `onComplete` navigates immediately.
 
-- [ ] **Step 3: Make the overlay reveal transform-safe**
+- [ ] **Step 3: Reuse the Hero visual background**
 
-Add `will-change: transform` and `overflow: hidden` to `.entry-transition` while retaining `background: var(--deep)`.
+Import `LightRays` into `EntryTransition.jsx`, render it with the Hero values `raysOrigin="top-center"`, `raysColor="#e6ff1a"`, and `raysSpeed={1.5}`, then render a decorative glass layer above it and below the copy.
 
-- [ ] **Step 4: Update the version record**
+- [ ] **Step 4: Make the overlay reveal transform-safe**
+
+Keep `will-change: transform`, `overflow: hidden`, and `background: var(--deep)`. Add isolated stacking rules for the ray background, the glass layer using `backdrop-filter: blur(20px) saturate(115%)`, and the foreground copy.
+
+- [ ] **Step 5: Update the version record**
 
 Add one line to `VERSION.md` describing the fast charcoal takeover and seamless hero continuity.
 
-- [ ] **Step 5: Run focused checks**
+- [ ] **Step 6: Run focused checks**
 
 Run:
 
 ```bash
 rg -n "yPercent: 100|duration: 0.26|duration: 0.38|stagger: 0.035" src/components/EntryTransition.jsx
+rg -n "LightRays|entry-transition-glass|blur\(20px\)" src/components/EntryTransition.jsx src/styles.css
 ! rg -q "to\(\{\}, \{ duration" src/components/EntryTransition.jsx
 git diff --check
 ```
 
 Expected: all commands exit successfully and no trailing hold remains.
 
-- [ ] **Step 6: Build and check local routes**
+- [ ] **Step 7: Build and check local routes**
 
 Run:
 

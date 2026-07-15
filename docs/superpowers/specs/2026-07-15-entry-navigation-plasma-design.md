@@ -34,6 +34,16 @@ Upgrade the independent entry page with a wide glass navigation bar and a restra
 - Preserve the existing project hover previews and bottom enter button.
 - The navigation and all interactive content stay above the Plasma and veil layers.
 
+## Hero-to-Info Continuity
+
+- Remove the abrupt charcoal-to-cream boundary between the portfolio Hero and the Info section.
+- Keep the upper and content-bearing area of Info on the same `var(--deep)` charcoal as the Hero.
+- Concentrate the transition back to `var(--bg)` in the lower tail of the Info section so all text remains on a reliably dark surface.
+- Use acid yellow for Info row labels and warm off-white at approximately 82% opacity for row values.
+- Use subtle translucent white dividers between Info rows.
+- Replace the photo's cream fade with a charcoal fade so the portrait integrates into the continuous dark area.
+- The following Directory section remains on the existing cream background.
+
 ## Navigation Data Flow
 
 - Extend the entry trigger from `onEnter()` to `onEnter(destination)`.
@@ -49,4 +59,5 @@ Upgrade the independent entry page with a wide glass navigation bar and a restra
 - The footer exposes `id="contact"`.
 - Plasma sits behind the entry content and uses the supplied acid-yellow settings.
 - Reduced-motion logic avoids running the animated Plasma.
+- Hero and Info read as one continuous dark composition, while Info labels, values, dividers, and the photo fade remain legible.
 - Production build succeeds and `/`, `/portfolio`, and `/portfolio#contact` remain reachable.

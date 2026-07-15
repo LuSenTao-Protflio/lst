@@ -36,9 +36,11 @@ Upgrade the independent entry page with a wide glass navigation bar and a restra
 
 ## Hero-to-Info Continuity
 
-- Remove the abrupt charcoal-to-cream boundary between the portfolio Hero and the Info section.
-- Keep the upper and content-bearing area of Info on the same `var(--deep)` charcoal as the Hero.
-- Concentrate the transition back to `var(--bg)` in the lower tail of the Info section so all text remains on a reliably dark surface.
+- Wrap the portfolio Hero and Info section in one shared `hero-info-flow` scene.
+- Render the existing `LightRays` background once at the shared-scene level so the ray field continues past the Hero and through the portrait area without being clipped at the section boundary.
+- Remove the separate Hero ray instance, the Info top border, and all independent opaque Hero/Info backgrounds.
+- Keep Hero and Info surfaces transparent over the shared `var(--deep)` scene.
+- Concentrate one long transition back to `var(--bg)` only in the lower tail of the shared scene, after all Info text, so the Directory begins on cream without a visible seam.
 - Use acid yellow for Info row labels and warm off-white at approximately 82% opacity for row values.
 - Use subtle translucent white dividers between Info rows.
 - Replace the photo's cream fade with a charcoal fade so the portrait integrates into the continuous dark area.
@@ -59,5 +61,6 @@ Upgrade the independent entry page with a wide glass navigation bar and a restra
 - The footer exposes `id="contact"`.
 - Plasma sits behind the entry content and uses the supplied acid-yellow settings.
 - Reduced-motion logic avoids running the animated Plasma.
-- Hero and Info read as one continuous dark composition, while Info labels, values, dividers, and the photo fade remain legible.
+- Hero and Info share one uninterrupted ray field with no border, line, clipped animation edge, or color reset between them.
+- Info labels, values, dividers, and the photo fade remain legible over the shared scene.
 - Production build succeeds and `/`, `/portfolio`, and `/portfolio#contact` remain reachable.

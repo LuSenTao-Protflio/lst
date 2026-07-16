@@ -10,7 +10,7 @@ import FloatingGlassNav from "./components/FloatingGlassNav";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <GlobalCursor />
       <ClickRings />
       <ScrollManager />

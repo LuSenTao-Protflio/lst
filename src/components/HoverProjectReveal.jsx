@@ -1,14 +1,75 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import projects from "../data/projects";
 import { useLanguage } from "../i18n";
+
+const PROXIMITY_RADIUS = 148;
+const SMOOTHING_MS = 110;
 
 export default function HoverProjectReveal() {
   const { t } = useLanguage();
   const reduceMotion = useReducedMotion();
   const [hovered, setHovered] = useState(null);
   const [finePointer, setFinePointer] = useState(false);
+  const rowRefs = useRef([]);
+  const targetRef = useRef([]);
+  const currentRef = useRef([]);
+  const frameRef = useRef(null);
+  const lastFrameRef = useRef(0);
+
+  const runFrame = useCallback((now) => {
+    const dt = Math.min((now - lastFrameRef.current) / 1000, 0.05);
+    const k = 1 - Math.exp(-dt / (SMOOTHING_MS / 1000));
+    let moving = false;
+
+    rowRefs.current.forEach((row, index) => {
+      if (!row) return;
+      const target = targetRef.current[index] ?? 0;
+      const current = currentRef.current[index] ?? 0;
+      const next = current + (target - current) * k;
+      const value = Math.abs(target - next) < 0.0015 ? target : next;
+      currentRef.current[index] = value;
+      row.style.setProperty("--proximity", value.toFixed(4));
+      if (value !== target) moving = true;
+    });
+
+    frameRef.current = moving ? requestAnimationFrame(runFrame) : null;
+  }, []);
+
+  const startLoop = useCallback(() => {
+    if (frameRef.current != null) return;
+    lastFrameRef.current = performance.now();
+    frameRef.current = requestAnimationFrame(runFrame);
+  }, [runFrame]);
+
+  const activateIndex = useCallback((index) => {
+    targetRef.current = rowRefs.current.map((_, rowIndex) => rowIndex === index ? 1 : 0);
+    setHovered(index);
+    startLoop();
+  }, [startLoop]);
+
+  const clearProximity = useCallback(() => {
+    targetRef.current = rowRefs.current.map(() => 0);
+    setHovered(null);
+    startLoop();
+  }, [startLoop]);
+
+  const handlePointerMove = useCallback((event) => {
+    if (!finePointer || reduceMotion) return;
+
+    const nextTargets = rowRefs.current.map((row) => {
+      if (!row) return 0;
+      const rect = row.getBoundingClientRect();
+      const distance = Math.abs(event.clientY - (rect.top + rect.height / 2));
+      return Math.max(0, 1 - distance / PROXIMITY_RADIUS) ** 2;
+    });
+    const closest = nextTargets.reduce((best, value, index) => value > nextTargets[best] ? index : best, 0);
+
+    targetRef.current = nextTargets;
+    setHovered(nextTargets[closest] > 0 ? closest : null);
+    startLoop();
+  }, [finePointer, reduceMotion, startLoop]);
 
   useEffect(() => {
     const query = window.matchMedia("(pointer:fine)");
@@ -18,31 +79,42 @@ export default function HoverProjectReveal() {
     return () => query.removeEventListener("change", sync);
   }, []);
 
+  useEffect(() => () => {
+    if (frameRef.current != null) cancelAnimationFrame(frameRef.current);
+  }, []);
+
   return (
-    <div
-      className="cover-project-reveal"
-      onPointerLeave={() => setHovered(null)}
-    >
-      <div className="cover-project-list">
+    <div className="cover-project-reveal">
+      <div
+        className="cover-project-list"
+        onPointerMove={handlePointerMove}
+        onPointerLeave={clearProximity}
+      >
         {projects.map((project, index) => {
           const translated = t(`projects.${project.id}`);
           const active = hovered === index;
-          const dimmed = hovered != null && !active;
           return (
             <motion.div
               key={project.id}
               className="cover-project-row-wrap"
-              initial={{ opacity: 0, y: 18 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.75 + index * 0.06 }}
+              transition={{ duration: 0.34, delay: 0.06 + index * 0.045 }}
             >
               <Link
+                ref={(element) => {
+                  rowRefs.current[index] = element;
+                  if (element && !element.style.getPropertyValue("--proximity")) {
+                    element.style.setProperty("--proximity", "0.0000");
+                  }
+                }}
                 to={`/project/${project.id}`}
-                className={`cover-project-row${active ? " is-active" : ""}${dimmed ? " is-dimmed" : ""}`}
-                onPointerEnter={() => finePointer && setHovered(index)}
-                onFocus={() => setHovered(index)}
-                onBlur={() => setHovered(null)}
+                className={`cover-project-row${active ? " is-active" : ""}`}
+                onFocus={() => activateIndex(index)}
+                onBlur={clearProximity}
               >
+                <span className="cover-project-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <span className="cover-project-tick" aria-hidden="true" />
                 <span className="cover-project-title">{translated.title}</span>
               </Link>
               {finePointer && !reduceMotion && project.id !== "misc" && (

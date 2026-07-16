@@ -9,6 +9,11 @@ import App from "./App";
 import { LanguageProvider } from "./i18n";
 import "./styles.css";
 
+const redirect = new URLSearchParams(window.location.search).get("redirect");
+if (redirect) {
+  window.history.replaceState(null, "", `${import.meta.env.BASE_URL}${redirect}`);
+}
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <LanguageProvider>

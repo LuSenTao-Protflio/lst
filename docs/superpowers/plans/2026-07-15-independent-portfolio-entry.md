@@ -27,6 +27,7 @@
 - Modify: `src/App.jsx`
 - Modify: `src/pages/Home.jsx`
 - Modify: `src/components/InteractiveCover.jsx`
+- Modify: `src/components/FloatingGlassNav.jsx`
 
 **Interfaces:**
 - Consumes: `InteractiveCover`, React Router's `useNavigate`, and the existing `Home` page.
@@ -81,6 +82,8 @@ Remove the `InteractiveCover` import and `<InteractiveCover />` call from `src/p
 ```jsx
 <header className="hero" id="portfolio-home">
 ```
+
+Update `FloatingGlassNav` so `/portfolio` is recognized as the homepage and project pages return to `/portfolio#directory` rather than the entry route.
 
 - [ ] **Step 4: Make entry navigation route-based**
 

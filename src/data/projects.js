@@ -3,6 +3,11 @@ const portfolioImages = import.meta.glob("../../assets/portfolio-pages/*.{jpg,pn
   import: "default",
 });
 const getP = (name) => portfolioImages[`../../assets/portfolio-pages/${name}`];
+const keycapImages = import.meta.glob("../../assets/keycaps/*.{jpg,png,jpeg}", {
+  eager: true,
+  import: "default",
+});
+const getK = (name) => keycapImages[`../../assets/keycaps/${name}`];
 
 const projects = [
   {
@@ -49,8 +54,25 @@ const projects = [
     narrative: {},
   },
   {
-    id: "gala",
+    id: "metakeys",
     num: "04",
+    tags: ["Branding", "Product Design", "3D Visual"],
+    title: "MetaKeys — 模块化键帽品牌设计",
+    en: "MetaKeys — Modular Keycap Brand Design",
+    desc: "围绕“键帽不止于按键”的品牌主张，构建模块化客制键帽的品牌概念与视觉系统。通过黑透键帽壳、可替换内容物与标准化底座形成产品逻辑，并延展至主海报、包装、挂绳、3D产品场景与传播物料。",
+    hero: getK("keycaps-03-packaging.jpg"),
+    images: [
+      getK("keycaps-01-overview.jpg"), getK("keycaps-02-poster.jpg"),
+      getK("keycaps-03-packaging.jpg"), getK("keycaps-04-lanyard.jpg"),
+      getK("keycaps-05-system.jpg"), getK("keycaps-06-product.jpg"),
+      getK("keycaps-07-application.jpg"), getK("keycaps-08-scene.jpg"),
+      getK("keycaps-09-render.jpg"),
+    ],
+    narrative: {},
+  },
+  {
+    id: "gala",
+    num: "05",
     tags: ["Event Design", "Key Visual", "Spatial Graphics"],
     title: "FRIDAY 缘起·热爱 — 帆书年会视觉",
     en: "FRIDAY Origin & Passion — Fanshu Annual Gala Visual",
@@ -64,7 +86,7 @@ const projects = [
   },
   {
     id: "storyteller",
-    num: "05",
+    num: "06",
     tags: ["Event Design", "Key Visual", "Branding"],
     title: "有请讲书人 — 读书月活动视觉",
     en: "The Storyteller — Reading Month Event Visual",
@@ -78,10 +100,10 @@ const projects = [
   },
   {
     id: "misc",
-    num: "06",
+    num: "07",
     tags: ["Poster", "Key Visual", "UI Design", "AR"],
-    title: "演讲物料、书店活动与其他实践",
-    en: "Speech · Bookstore · Nantou AR Tour",
+    title: "杂项",
+    en: "Miscellaneous",
     desc: "「非凡大咖」松弛的力量主题KV海报；世界读书日插画海报「给生活松松绑」及年度书单展架系统；南头古城AR实景导航界面设计。跨越演讲视觉、书店物料与数字交互的多元设计实践。",
     hero: getP("45.jpg"),
     images: [

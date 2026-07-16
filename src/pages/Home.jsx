@@ -1,33 +1,31 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import LightRays from "../components/LightRays";
 import projects from "../data/projects";
 import { useLanguage } from "../i18n";
 import photoImg from "../../assets/IMG_2345.png";
+import SiteFooter from "../components/SiteFooter";
+import ProjectFolderReveal from "../components/ProjectFolderReveal";
 
 export default function Home() {
   const { lang, setLang, t } = useLanguage();
-  const [hovered, setHovered] = useState(null);
-  const cursorRef = useRef(null);
+  const [activeFolder, setActiveFolder] = useState(null);
+  const [hoverFolders, setHoverFolders] = useState(false);
+  const toggleLang = () => setLang(l => (l === "zh" ? "en" : "zh"));
 
   useEffect(() => {
-    const onMove = (e) => {
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
-      }
-    };
-    window.addEventListener("mousemove", onMove, { passive: true });
-    return () => window.removeEventListener("mousemove", onMove);
+    const query = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const sync = () => setHoverFolders(query.matches);
+    sync();
+    query.addEventListener("change", sync);
+    return () => query.removeEventListener("change", sync);
   }, []);
-
-  const toggleLang = () => setLang(l => (l === "zh" ? "en" : "zh"));
 
   return (
     <div className="app">
-      <div className="cursor" ref={cursorRef} data-visible={!!hovered} />
       <nav className="nav">
-        <span className="nav-logo">{lang === "zh" ? "卢森涛" : "Lusen Tao"}</span>
+        <span className="nav-logo">Lusen Tao</span>
         <div className="nav-links">
           <a href="#directory" className="nav-link">{t("nav.work")}</a>
           <a href="#info" className="nav-link">{t("nav.info")}</a>
@@ -46,12 +44,11 @@ export default function Home() {
         </button>
       </nav>
 
-      {/* ── Hero ── */}
-      <header className="hero">
+      <section className="hero-info-flow">
         <LightRays
-          className="hero-rays"
+          className="hero-info-rays"
           raysOrigin="top-center"
-          raysColor="#ffffff"
+          raysColor="#e6ff1a"
           raysSpeed={1.5}
           lightSpread={2.8}
           rayLength={5}
@@ -63,6 +60,8 @@ export default function Home() {
           noiseAmount={0.5}
           distortion={0}
         />
+        {/* ── Hero ── */}
+        <header className="hero" id="portfolio-home">
         <motion.div
           className="hero-content"
           initial={{ opacity: 0 }}
@@ -71,13 +70,13 @@ export default function Home() {
         >
           <p className="hero-eyebrow">{t("hero.eyebrow")}</p>
           <h1 className="hero-title">
-            <motion.span initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 0.61, 0.36, 1] }}>
+            <motion.span className={lang === "en" ? "hero-title-en-display" : undefined} initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 0.61, 0.36, 1] }}>
               {t("hero.name")}
             </motion.span>
-            <motion.span initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 0.61, 0.36, 1] }}>
+            <motion.span className="hero-title-en-display" initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 0.61, 0.36, 1] }}>
               {t("hero.role")}
             </motion.span>
-            <motion.span initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7, delay: 0.45, ease: [0.22, 0.61, 0.36, 1] }}>
+            <motion.span className="hero-title-en-display" initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7, delay: 0.45, ease: [0.22, 0.61, 0.36, 1] }}>
               {t("hero.portfolio")}
             </motion.span>
           </h1>
@@ -88,17 +87,14 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.7 }}
           >
             {t("hero.meta").split("\n").map((line, i) => (
-              <span key={i}>
-                {line}
-                {i < t("hero.meta").split("\n").length - 1 && <br />}
-              </span>
+              <span key={i}>{line}</span>
             ))}
           </motion.p>
         </motion.div>
-      </header>
+        </header>
 
-      {/* ── Info ── */}
-      <section className="info" id="info">
+        {/* ── Info ── */}
+        <section className="info" id="info">
         <motion.div
           className="info-layout"
           initial={{ opacity: 0, y: 40 }}
@@ -130,6 +126,7 @@ export default function Home() {
             </div>
           </div>
         </motion.div>
+        </section>
       </section>
 
       {/* ── Project Directory ── */}
@@ -156,8 +153,6 @@ export default function Home() {
                 <a
                   href={`#${p.id}`}
                   className="dir-row"
-                  onMouseEnter={() => setHovered(p.id)}
-                  onMouseLeave={() => setHovered(null)}
                 >
                   <span className="dir-row-num">{p.num}</span>
                   <div className="dir-row-body">
@@ -188,19 +183,35 @@ export default function Home() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: i * 0.06 }}
             >
-              <div className="project-body">
-                <span className="project-num">{p.num}</span>
-                <div className="project-tags">
-                  {p.tags.map((t) => <span key={t}>{t}</span>)}
+              <div
+                className="project-summary"
+                onPointerEnter={() => hoverFolders && setActiveFolder(p.id)}
+                onPointerLeave={() => hoverFolders && setActiveFolder(null)}
+                onFocusCapture={() => setActiveFolder(p.id)}
+                onBlurCapture={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget)) setActiveFolder(null);
+                }}
+                onClick={(event) => {
+                  if (!hoverFolders && !event.target.closest("a")) {
+                    setActiveFolder(current => current === p.id ? null : p.id);
+                  }
+                }}
+              >
+                <div className="project-body">
+                  <span className="project-num">{p.num}</span>
+                  <div className="project-tags">
+                    {p.tags.map((t) => <span key={t}>{t}</span>)}
+                  </div>
+                  <h2 className="project-title">{projectT.title}</h2>
+                  <p className="project-en">{projectT.en}</p>
+                  <p className="project-desc">{projectT.desc}</p>
                 </div>
-                <h2 className="project-title">{projectT.title}</h2>
-                <p className="project-en">{projectT.en}</p>
-                <p className="project-desc">{projectT.desc}</p>
+                <ProjectFolderReveal project={p} title={projectT.title} open={activeFolder === p.id} />
               </div>
 
               {p.images.length > 0 && (
                 <div className="project-grid">
-                  {p.images.map((src, j) => (
+                  {p.images.slice(0, 3).map((src, j) => (
                     <motion.div
                       key={src}
                       className="grid-item"
@@ -221,26 +232,7 @@ export default function Home() {
         })}
       </section>
 
-      <footer className="footer">
-        <div className="footer-inner">
-          <div className="footer-col">
-            <h3 className="footer-heading">{t("footer.col1Heading")}</h3>
-            <a href="mailto:sentaolu371@gmail.com" className="footer-email">{t("footer.col1Email")}</a>
-            <div className="footer-btns">
-              {t("footer.col1Btns").map((label, i) => {
-                if (label === "微信" || label === "WeChat") {
-                  return <a href="/wechat" className="footer-btn" key={i}>{label}</a>;
-                }
-                return <a href="#" className="footer-btn" key={i}>{label}</a>;
-              })}
-            </div>
-          </div>
-          <div className="footer-col">
-            <h3 className="footer-heading">{t("footer.col2Heading")}</h3>
-            <p className="footer-about">{t("footer.col2Desc")}</p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

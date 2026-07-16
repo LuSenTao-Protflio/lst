@@ -8,7 +8,7 @@ export default function Wechat() {
   return (
     <div className="app">
       <nav className="nav">
-        <span className="nav-logo">{lang === "zh" ? "卢森涛" : "Lusen Tao"}</span>
+        <span className="nav-logo">Lusen Tao</span>
         <div className="nav-right">
           <Link to="/" className="nav-link">{lang === "zh" ? "作品" : "Work"}</Link>
           <button className="nav-lang" onClick={toggleLang}>

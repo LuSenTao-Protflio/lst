@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Entry from "./pages/Entry";
+import Prelude from "./pages/Prelude";
 import Home from "./pages/Home";
 import ProjectDetail from "./components/ProjectDetail";
 import Wechat from "./pages/Wechat";
@@ -16,7 +17,8 @@ export default function App() {
       <ScrollManager />
       <FloatingGlassNav />
       <Routes>
-        <Route path="/" element={<Entry />} />
+        <Route path="/" element={<Prelude />} />
+        <Route path="/entry" element={<Entry />} />
         <Route path="/portfolio" element={<Home />} />
         <Route path="/project/:id" element={<ProjectDetail />} />
         <Route path="/wechat" element={<Wechat />} />

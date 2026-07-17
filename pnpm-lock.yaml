@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource-variable/roboto-flex':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@fontsource/manrope':
         specifier: ^5.2.6
         version: 5.2.8
@@ -253,6 +256,9 @@ packages:
     engines: {node: '>=12'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource-variable/roboto-flex@5.2.8':
+    resolution: {integrity: sha512-Q9zbz+P2VrDeIxBu9YAIG+eYpLmQF5FIJEEwAWn8En9Lao1TOISnoYcywGV+jSv7LGsHEndCR8hveXPnvCBEQQ==}
 
   '@fontsource/manrope@5.2.8':
     resolution: {integrity: sha512-gJHJmcuUk7qWcNCfcAri/DJQtXtBYqi9yKratr4jXhSo0I3xUtNNKI+igQIcw5c+m95g0vounk8ZnX/kb8o0TA==}
@@ -673,6 +679,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.18.20':
     optional: true
+
+  '@fontsource-variable/roboto-flex@5.2.8': {}
 
   '@fontsource/manrope@5.2.8': {}
 

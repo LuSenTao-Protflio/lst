@@ -105,6 +105,16 @@ export default function Home() {
           <div className="info-photo-wrap">
             <div className="info-photo">
               <img src={photoImg} alt={t("hero.name")} />
+              <div className="info-photo-contact-card">
+                <span className="info-photo-avatar" aria-hidden="true">
+                  <img src={photoImg} alt="" />
+                </span>
+                <span className="info-photo-contact-copy">
+                  <strong>卢森涛</strong>
+                  <small>{lang === "zh" ? "视觉传达设计" : "Visual Communication Design"}</small>
+                </span>
+                <a href="#contact" className="info-photo-contact-action">{lang === "zh" ? "联系我" : "Contact"}</a>
+              </div>
             </div>
           </div>
           <div className="info-cols">

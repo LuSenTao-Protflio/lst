@@ -219,7 +219,7 @@ export default function Home() {
 
                 {p.images.length > 0 && (
                   <div className="project-grid">
-                    {p.images.slice(0, 3).map((src, j) => (
+                    {(p.previewImages || p.images).slice(0, 3).map((src, j) => (
                       <motion.div
                         key={src}
                         className="grid-item"

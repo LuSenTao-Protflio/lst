@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import ProjectLabel from "./ProjectLabel";
 
@@ -43,6 +44,13 @@ export default function EditorialProjectDetail({ project, projectT }) {
   const pairImages = contentImages.slice(1, 3);
   const asymmetricImages = contentImages.slice(3, 5);
   const remainingImages = contentImages.slice(5);
+  const defaultStoryLayout = [
+    { sectionIndex: 0, layout: "wide", images: fullImage ? [fullImage] : [] },
+    { sectionIndex: 1, layout: "pair", images: pairImages },
+    { sectionIndex: 2, layout: "asymmetric", images: asymmetricImages },
+    { layout: "remainder", images: remainingImages },
+  ].filter((group) => group.images.length > 0);
+  const storyLayout = project.storyLayout || defaultStoryLayout;
 
   return (
     <main className={`editorial-detail editorial-detail-${project.id}`}>
@@ -65,28 +73,28 @@ export default function EditorialProjectDetail({ project, projectT }) {
       </section>
 
       <section className="editorial-story">
-        <StoryCopy section={detail.sections[0]} reduceMotion={reduceMotion} />
-        <div className="editorial-story-wide">
-          <ImageFigure src={fullImage} alt={`${projectT.title} — visual overview`} reduceMotion={reduceMotion} />
-        </div>
-
-        <StoryCopy section={detail.sections[1]} alignRight reduceMotion={reduceMotion} />
-        <div className="editorial-story-pair">
-          {pairImages.map((src, index) => <ImageFigure key={src} src={src} alt={`${projectT.title} — design system ${index + 1}`} reduceMotion={reduceMotion} delay={index * 0.06} />)}
-        </div>
-
-        <StoryCopy section={detail.sections[2]} reduceMotion={reduceMotion} />
-        {asymmetricImages.length > 0 && (
-          <div className={`editorial-story-asymmetric editorial-count-${asymmetricImages.length}`}>
-            {asymmetricImages.map((src, index) => <ImageFigure key={src} src={src} alt={`${projectT.title} — application ${index + 1}`} reduceMotion={reduceMotion} delay={index * 0.06} />)}
-          </div>
-        )}
-
-        {remainingImages.length > 0 && (
-          <div className={`editorial-story-remainder editorial-count-${remainingImages.length}`}>
-            {remainingImages.map((src, index) => <ImageFigure key={src} src={src} alt={`${projectT.title} — final application ${index + 1}`} reduceMotion={reduceMotion} delay={index * 0.06} />)}
-          </div>
-        )}
+        {storyLayout.map((group, groupIndex) => (
+          <Fragment key={`${group.layout}-${groupIndex}`}>
+            {Number.isInteger(group.sectionIndex) && (
+              <StoryCopy
+                section={detail.sections[group.sectionIndex]}
+                alignRight={group.sectionIndex === 1}
+                reduceMotion={reduceMotion}
+              />
+            )}
+            <div className={`editorial-story-${group.layout} editorial-count-${group.images.length}${group.align ? ` editorial-align-${group.align}` : ""}`}>
+              {group.images.map((src, index) => (
+                <ImageFigure
+                  key={src}
+                  src={src}
+                  alt={`${projectT.title} physical application ${groupIndex + 1}.${index + 1}`}
+                  reduceMotion={reduceMotion}
+                  delay={index * 0.06}
+                />
+              ))}
+            </div>
+          </Fragment>
+        ))}
       </section>
 
     </main>

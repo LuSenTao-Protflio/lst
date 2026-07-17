@@ -11,14 +11,20 @@ const reveal = (reduceMotion, delay = 0) => ({
 export default function WoofProjectDetail({ project, projectT }) {
   const reduceMotion = useReducedMotion();
   const detail = projectT.detail;
+  const detailImages = project.detailImages || project.images;
+  const detailImageAlts = project.detailImageAlts || [];
 
   return (
     <main className="woof-detail">
       <section className="woof-exhibition">
         <div className="woof-image-stream" aria-label={`${projectT.title} project images`}>
-          {project.images.map((src, index) => (
+          {detailImages.map((src, index) => (
             <motion.figure key={src} {...reveal(reduceMotion, Math.min(index * 0.035, 0.14))}>
-              <img src={src} alt={`${projectT.title} — ${index + 1}`} />
+              <img
+                src={src}
+                alt={detailImageAlts[index] || `${projectT.title} — ${index + 1}`}
+                loading={index > 1 ? "lazy" : "eager"}
+              />
             </motion.figure>
           ))}
         </div>

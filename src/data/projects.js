@@ -3,11 +3,21 @@ const portfolioImages = import.meta.glob("../../assets/portfolio-pages/*.{jpg,pn
   import: "default",
 });
 const getP = (name) => portfolioImages[`../../assets/portfolio-pages/${name}`];
-const keycapImages = import.meta.glob("../../assets/keycaps/*.{jpg,png,jpeg}", {
+const dailyReadingImages = import.meta.glob("../assets/daily-reading/*.{jpg,png,jpeg}", {
   eager: true,
   import: "default",
 });
-const getK = (name) => keycapImages[`../../assets/keycaps/${name}`];
+const getD = (name) => dailyReadingImages[`../assets/daily-reading/${name}`];
+const whelkImages = import.meta.glob("../assets/whelk/*.{jpg,png,jpeg}", {
+  eager: true,
+  import: "default",
+});
+const getW = (name) => whelkImages[`../assets/whelk/${name}`];
+const woofImages = import.meta.glob("../assets/woof/*.{jpg,png,jpeg}", {
+  eager: true,
+  import: "default",
+});
+const getWoof = (name) => woofImages[`../assets/woof/${name}`];
 
 const projects = [
   {
@@ -22,11 +32,50 @@ const projects = [
       getP("05.jpg"), getP("06.jpg"), getP("07.jpg"), getP("08.jpg"),
       getP("09.jpg"), getP("10.jpg"), getP("11.jpg"), getP("12.jpg"),
     ],
+    previewImages: [
+      getP("05.jpg"),
+      getP("06.jpg"),
+      getW("whelk-main-preview.jpg"),
+    ],
+    storyLayout: [
+      { sectionIndex: 0, layout: "wide", images: [getP("05.jpg")] },
+      { sectionIndex: 1, layout: "pair", images: [getP("06.jpg"), getP("08.jpg")] },
+      { layout: "asymmetric", images: [getW("wash-label.jpg"), getW("rug.jpg")] },
+      { sectionIndex: 2, layout: "wide", images: [getP("09.jpg")] },
+      { layout: "portrait", align: "left", images: [getW("fabric-bag.jpg")] },
+      { layout: "wide", images: [getP("10.jpg")] },
+      { layout: "portrait", align: "right", images: [getW("charm.jpg")] },
+      { layout: "pair", images: [getP("11.jpg"), getP("12.jpg")] },
+      { layout: "wide", images: [getW("mugs.jpg")] },
+    ],
+    narrative: {},
+  },
+  {
+    id: "daily-reading",
+    num: "02",
+    tags: ["Event Design", "Visual System", "Campaign"],
+    title: "天安云谷（日常）读书节",
+    en: "Daily Reading Festival",
+    desc: "以「阅读即日常」为核心，为天安云谷社区读书文化节建立持续42天的视觉系统。明亮黄色、模块化信息框与线性书本图形贯穿四类互动活动、主题书单、活动日历和传播海报。",
+    hero: getD("hero.jpg"),
+    images: [
+      getD("hero.jpg"), getD("exchange-coffee.jpg"),
+      getD("exchange-vegetable.jpg"), getD("system-white.jpg"),
+      getD("exchange-book.jpg"), getD("exchange-plant.jpg"),
+      getD("forty-two-days.jpg"), getD("theme-commute.jpg"),
+      getD("theme-midday.jpg"), getD("theme-evening.jpg"),
+      getD("schedule.jpg"), getD("closing-mark.jpg"),
+    ],
+    previewImages: [
+      getD("hero.jpg"),
+      getD("daily-preview-illustration.jpg"),
+      getD("daily-preview-system.jpg"),
+    ],
     narrative: {},
   },
   {
     id: "woof",
-    num: "02",
+    num: "03",
     tags: ["UI/UX", "Product Design"],
     title: "WOOF-WOOF 宠物友好社交APP",
     en: "WOOF-WOOF — Pet-Friendly Social App",
@@ -36,11 +85,33 @@ const projects = [
       getP("14.jpg"), getP("15.jpg"),
       getP("16.jpg"), getP("17.jpg"), getP("18.jpg"), getP("19.jpg"),
     ],
+    detailImages: [
+      getWoof("research-demographics.jpg"),
+      getWoof("research-interviews.jpg"),
+      getWoof("research-functions.jpg"),
+      getWoof("research-feature-system.jpg"),
+      getWoof("research-moodboard.jpg"),
+      getP("14.jpg"), getP("15.jpg"), getP("16.jpg"),
+      getP("17.jpg"), getP("18.jpg"), getP("19.jpg"),
+    ],
+    detailImageAlts: [
+      "WOOF-WOOF pet-owner demographic research",
+      "WOOF-WOOF interview findings and synthesis",
+      "WOOF-WOOF provisional application functions",
+      "WOOF-WOOF foundational feature system",
+      "WOOF-WOOF visual research and moodboard",
+      "WOOF-WOOF product visual 1",
+      "WOOF-WOOF product visual 2",
+      "WOOF-WOOF product visual 3",
+      "WOOF-WOOF product visual 4",
+      "WOOF-WOOF product visual 5",
+      "WOOF-WOOF product visual 6",
+    ],
     narrative: {},
   },
   {
     id: "memory",
-    num: "03",
+    num: "04",
     tags: ["Publication", "Visual Narrative"],
     title: "阿尔兹海默症·记忆的回流",
     en: "Backflow of Memory — Alzheimer's Publication",
@@ -50,23 +121,6 @@ const projects = [
       getP("22.jpg"), getP("23.jpg"),
       getP("24.jpg"), getP("25.jpg"), getP("26.jpg"),
       getP("27.jpg"), getP("28.jpg"), getP("29.jpg"),
-    ],
-    narrative: {},
-  },
-  {
-    id: "metakeys",
-    num: "04",
-    tags: ["Branding", "Product Design", "3D Visual"],
-    title: "MetaKeys — 模块化键帽品牌设计",
-    en: "MetaKeys — Modular Keycap Brand Design",
-    desc: "围绕“键帽不止于按键”的品牌主张，构建模块化客制键帽的品牌概念与视觉系统。通过黑透键帽壳、可替换内容物与标准化底座形成产品逻辑，并延展至主海报、包装、挂绳、3D产品场景与传播物料。",
-    hero: getK("keycaps-03-packaging.jpg"),
-    images: [
-      getK("keycaps-01-overview.jpg"), getK("keycaps-02-poster.jpg"),
-      getK("keycaps-03-packaging.jpg"), getK("keycaps-04-lanyard.jpg"),
-      getK("keycaps-05-system.jpg"), getK("keycaps-06-product.jpg"),
-      getK("keycaps-07-application.jpg"), getK("keycaps-08-scene.jpg"),
-      getK("keycaps-09-render.jpg"),
     ],
     narrative: {},
   },

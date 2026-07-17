@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import projects from "../data/projects";
 import { useLanguage } from "../i18n";
 import WoofProjectDetail from "./WoofProjectDetail";
-import MetaKeysProjectDetail from "./MetaKeysProjectDetail";
+import DailyReading from "../pages/DailyReading";
 import EditorialProjectDetail from "./EditorialProjectDetail";
 import ProjectChrome from "./ProjectChrome";
 import ProjectTaskbar from "./ProjectTaskbar";
@@ -26,8 +26,8 @@ export default function ProjectDetail() {
 
   const detailContent = project.id === "woof"
     ? <WoofProjectDetail project={project} projectT={projectT} />
-    : project.id === "metakeys"
-      ? <MetaKeysProjectDetail project={project} projectT={projectT} />
+    : project.id === "daily-reading"
+      ? <DailyReading projectT={projectT} />
       : <EditorialProjectDetail project={project} projectT={projectT} />;
 
   return <><ProjectTaskbar project={project} title={projectT.title} />{detailContent}<ProjectChrome currentId={project.id} /></>;

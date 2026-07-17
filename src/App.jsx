@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Entry from "./pages/Entry";
 import Prelude from "./pages/Prelude";
 import Home from "./pages/Home";
@@ -21,6 +21,7 @@ export default function App() {
         <Route path="/entry" element={<Entry />} />
         <Route path="/portfolio" element={<Home />} />
         <Route path="/project/:id" element={<ProjectDetail />} />
+        <Route path="/daily-reading" element={<Navigate to="/project/daily-reading" replace />} />
         <Route path="/wechat" element={<Wechat />} />
       </Routes>
     </BrowserRouter>

@@ -1,5 +1,5 @@
 export default function ProjectFolderReveal({ project, title, open }) {
-  const images = project.images.slice(0, 3);
+  const images = (project.previewImages || project.images).slice(0, 3);
   const label = title;
 
   return (

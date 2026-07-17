@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import projects from "../data/projects";
 import { useLanguage } from "../i18n";
@@ -43,12 +42,6 @@ export default function HoverProjectReveal() {
     frameRef.current = requestAnimationFrame(runFrame);
   }, [runFrame]);
 
-  const activateIndex = useCallback((index) => {
-    targetRef.current = rowRefs.current.map((_, rowIndex) => rowIndex === index ? 1 : 0);
-    setHovered(index);
-    startLoop();
-  }, [startLoop]);
-
   const clearProximity = useCallback(() => {
     targetRef.current = rowRefs.current.map(() => 0);
     setHovered(null);
@@ -87,6 +80,7 @@ export default function HoverProjectReveal() {
     <div className="cover-project-reveal">
       <div
         className="cover-project-list"
+        role="list"
         onPointerMove={handlePointerMove}
         onPointerLeave={clearProximity}
       >
@@ -101,22 +95,20 @@ export default function HoverProjectReveal() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.34, delay: 0.06 + index * 0.045 }}
             >
-              <Link
+              <div
                 ref={(element) => {
                   rowRefs.current[index] = element;
                   if (element && !element.style.getPropertyValue("--proximity")) {
                     element.style.setProperty("--proximity", "0.0000");
                   }
                 }}
-                to={`/project/${project.id}`}
                 className={`cover-project-row${active ? " is-active" : ""}`}
-                onFocus={() => activateIndex(index)}
-                onBlur={clearProximity}
+                role="listitem"
               >
                 <span className="cover-project-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                 <span className="cover-project-tick" aria-hidden="true" />
                 <span className="cover-project-title">{translated.title}</span>
-              </Link>
+              </div>
               {finePointer && !reduceMotion && project.id !== "misc" && (
                 <motion.div
                   className="cover-project-preview"

@@ -44,23 +44,11 @@ export default function InteractiveCover({ onEnter, isExiting = false }) {
       )}
       <div className="cover-glass-veil" aria-hidden="true" />
 
-      <motion.nav
-        className="cover-text-nav"
-        aria-label={lang === "zh" ? "入口导航" : "Entry navigation"}
-        initial={reduceMotion ? false : { opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.32 }}
-      >
-        <button type="button" className="cover-text-nav-item cover-text-nav-work" onClick={() => enterPortfolio("/portfolio#work")}>
-          <span aria-hidden="true">01</span> WORK
-        </button>
-        <button type="button" className="cover-text-nav-item cover-text-nav-info" onClick={() => enterPortfolio("/portfolio#info")}>
-          <span aria-hidden="true">02</span> INFO
-        </button>
-        <button type="button" className="cover-text-nav-item cover-text-nav-contact" onClick={() => enterPortfolio("/portfolio#contact")}>
-          <span aria-hidden="true">03</span> {lang === "zh" ? "联系我" : "CONTACT"}
-        </button>
-      </motion.nav>
+      <header className="cover-meta-grid">
+        <span className="cover-meta cover-meta-name">Lusentao</span>
+        <span className="cover-meta cover-meta-school">深圳大学</span>
+        <span className="cover-meta cover-meta-major">视觉传达设计</span>
+      </header>
 
       <div className="cover-main-grid">
         <HoverProjectReveal />

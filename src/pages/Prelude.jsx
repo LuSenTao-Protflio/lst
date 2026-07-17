@@ -47,7 +47,7 @@ export default function Prelude() {
       className={`prelude${leaving ? " is-leaving" : ""}`}
       onWheel={handleWheel}
       initial={reduceMotion ? false : { opacity: 0.01 }}
-      animate={{ opacity: 1 }}
+      animate={leaving ? { opacity: 0, filter: "blur(4px)" } : { opacity: 1, filter: "blur(0px)" }}
       transition={{ duration: 0.45 }}
     >
       {!reduceMotion && (

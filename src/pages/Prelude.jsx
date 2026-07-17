@@ -9,7 +9,6 @@ export default function Prelude() {
   const navigate = useNavigate();
   const reduceMotion = useReducedMotion();
   const [leaving, setLeaving] = useState(false);
-  const [pointer, setPointer] = useState(null);
   const lockedRef = useRef(false);
   const timeoutRef = useRef(null);
 
@@ -45,7 +44,6 @@ export default function Prelude() {
     <motion.main
       className={`prelude${leaving ? " is-leaving" : ""}`}
       onWheel={handleWheel}
-      onPointerMove={(event) => setPointer({ x: event.clientX, y: event.clientY })}
       initial={reduceMotion ? false : { opacity: 0.01 }}
       animate={leaving ? { opacity: 0, filter: "blur(4px)" } : { opacity: 1, filter: "blur(0px)" }}
       transition={{ duration: 0.45 }}
@@ -76,7 +74,7 @@ export default function Prelude() {
       </header>
 
       <div className="prelude-title-wrap">
-        <KineticPortfolioTitle text="PORTFOLIO" reduceMotion={reduceMotion} pointer={pointer} />
+        <KineticPortfolioTitle text="PORTFOLIO" reduceMotion={reduceMotion} />
       </div>
 
       <button type="button" className="prelude-enter-control" onClick={advance} aria-label="进入项目入口">

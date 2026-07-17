@@ -6,6 +6,6 @@ export function calculateGlyphVariation(distance, maxDistance) {
   return {
     weight: Math.round(100 + influence * 800),
     width: Math.round(25 + influence * 126),
-    italic: Number(influence.toFixed(2)),
+    alpha: Number(influence.toFixed(2)),
   };
 }

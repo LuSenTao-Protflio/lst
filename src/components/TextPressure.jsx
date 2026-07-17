@@ -31,5 +31,5 @@ export default function TextPressure({ text = "Compressa", width = true, weight 
     animate(); return () => cancelAnimationFrame(rafId);
   }, [alpha, italic, reduceMotion, weight, width]);
   const dynamicClassName = [className, flex ? "flex" : "", stroke ? "stroke" : ""].filter(Boolean).join(" ");
-  return <div ref={containerRef} className="text-pressure-container"><h1 ref={titleRef} className={`text-pressure-title ${dynamicClassName}`} style={{ fontSize, lineHeight, transform: `scale(1, ${scaleY})`, fontFamily: "Roboto Flex", color: textColor }}>{chars.map((char, index) => <span key={`${char}-${index}`} ref={(element) => { spansRef.current[index] = element; }} data-char={char}>{char}</span>)}</h1></div>;
+  return <div ref={containerRef} className="text-pressure-container"><h1 ref={titleRef} className={`text-pressure-title ${dynamicClassName}`} style={{ fontSize, lineHeight, transform: `scale(1, ${scaleY})`, fontFamily: "Roboto Flex Variable", color: textColor }}>{chars.map((char, index) => <span key={`${char}-${index}`} ref={(element) => { spansRef.current[index] = element; }} data-char={char}>{char}</span>)}</h1></div>;
 }

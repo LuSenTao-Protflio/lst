@@ -44,6 +44,12 @@ test("TextPressure retains the supplied cursor and axis behavior", async () => {
   assert.match(source, /getAttr\(d, maxDist, 5, 200\)/);
 });
 
+test("TextPressure uses the registered local variable font family", async () => {
+  const source = await readFile(new URL("../src/components/TextPressure.jsx", import.meta.url), "utf8");
+
+  assert.match(source, /fontFamily: "Roboto Flex Variable"/);
+});
+
 test("phone contact uses the footer heading hierarchy", async () => {
   const styles = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
   const rule = styles.match(/\.footer-phone\{[^}]*\}/)?.[0] ?? "";

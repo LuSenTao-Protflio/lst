@@ -1,11 +1,11 @@
-const INFLUENCE_RADIUS = 290;
+const clamp = (value, minimum, maximum) => Math.min(maximum, Math.max(minimum, value));
 
-export function calculateGlyphVariation(distance) {
-  const influence = Math.max(0, 1 - distance / INFLUENCE_RADIUS);
+export function calculateGlyphVariation(distance, maxDistance) {
+  const influence = 1 - clamp(distance / maxDistance, 0, 1);
 
   return {
-    weight: Math.round(420 + influence * 480),
-    width: Math.round(88 + influence * 52),
-    italic: Number((influence * 10).toFixed(2)),
+    weight: Math.round(100 + influence * 800),
+    width: Math.round(25 + influence * 126),
+    italic: Number(influence.toFixed(2)),
   };
 }

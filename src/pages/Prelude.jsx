@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import KineticPortfolioTitle from "../components/KineticPortfolioTitle";
+import TextPressure from "../components/TextPressure";
 import LightRays from "../components/LightRays";
 import { shouldAdvanceFromKey, shouldAdvanceFromWheel } from "../utils/preludeNavigation";
 
@@ -74,7 +74,7 @@ export default function Prelude() {
       </header>
 
       <div className="prelude-title-wrap">
-        <KineticPortfolioTitle text="PORTFOLIO" reduceMotion={reduceMotion} />
+        <TextPressure text="portfolio" flex alpha={false} stroke={false} width weight italic={false} textColor="#E6FF1A" minFontSize={36} reduceMotion={reduceMotion} />
       </div>
 
       <button type="button" className="prelude-enter-control" onClick={advance} aria-label="进入项目入口">

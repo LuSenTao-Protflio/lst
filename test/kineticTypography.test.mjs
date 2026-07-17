@@ -19,25 +19,35 @@ test("interpolates every axis for nearby glyphs", () => {
   assert.ok(variation.alpha > 0 && variation.alpha < 1);
 });
 
-test("prelude renders a single PORTFOLIO title", async () => {
+test("prelude renders a single TextPressure portfolio title", async () => {
   const source = await readFile(new URL("../src/pages/Prelude.jsx", import.meta.url), "utf8");
 
-  assert.match(source, /text="PORTFOLIO"/);
+  assert.match(source, /text="portfolio"/);
   assert.doesNotMatch(source, /GRAPHIC|DESIGN/);
 });
 
-test("title emits alpha without an italic axis", async () => {
-  const source = await readFile(new URL("../src/components/KineticPortfolioTitle.jsx", import.meta.url), "utf8");
+test("prelude configures the supplied TextPressure props", async () => {
+  const source = await readFile(new URL("../src/pages/Prelude.jsx", import.meta.url), "utf8");
 
-  assert.match(source, /glyph\.style\.opacity/);
-  assert.doesNotMatch(source, /'ital'/);
+  assert.match(source, /text="portfolio"/);
+  assert.match(source, /alpha=\{false\}/);
+  assert.match(source, /italic=\{false\}/);
+  assert.match(source, /textColor="#E6FF1A"/);
 });
 
-test("contact glass uses compact yellow pill geometry", async () => {
-  const styles = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
-  const rule = styles.match(/\.info-photo-contact-card\{[^}]*\}/)?.[0] ?? "";
+test("TextPressure retains the supplied cursor and axis behavior", async () => {
+  const source = await readFile(new URL("../src/components/TextPressure.jsx", import.meta.url), "utf8");
 
-  assert.match(rule, /width:76%/);
-  assert.match(rule, /border-radius:999px/);
-  assert.match(rule, /230,255,26/);
+  assert.match(source, /const getAttr/);
+  assert.match(source, /window\.addEventListener\('mousemove'/);
+  assert.match(source, /requestAnimationFrame\(animate\)/);
+  assert.match(source, /getAttr\(d, maxDist, 5, 200\)/);
+});
+
+test("phone contact uses the footer heading hierarchy", async () => {
+  const styles = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+  const rule = styles.match(/\.footer-phone\{[^}]*\}/)?.[0] ?? "";
+
+  assert.match(rule, /font-size:\.68rem/);
+  assert.match(rule, /color:var\(--accent\)/);
 });

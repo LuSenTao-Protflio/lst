@@ -159,4 +159,3 @@ Expected: Vite exits with code 0 and produces `dist/`.
 Run: `git diff --check 39e3142..HEAD && git status --short`
 
 Expected: no diff-check output and no uncommitted files.
-

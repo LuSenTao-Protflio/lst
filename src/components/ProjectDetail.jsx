@@ -17,7 +17,7 @@ export default function ProjectDetail() {
       <div className="detail-not-found">
         <h1>{t("detail.notFound")}</h1>
         <p>{t("detail.notFoundDesc").replace("{id}", id)}</p>
-        <Link to="/" className="detail-back-link">{t("detail.back")}</Link>
+        <Link to="/entry" className="detail-back-link">{t("detail.back")}</Link>
       </div>
     );
   }

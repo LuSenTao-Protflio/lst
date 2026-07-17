@@ -10,7 +10,7 @@ export default function Wechat() {
       <nav className="nav">
         <span className="nav-logo">Lusen Tao</span>
         <div className="nav-right">
-          <Link to="/" className="nav-link">{lang === "zh" ? "作品" : "Work"}</Link>
+          <Link to="/entry" className="nav-link">{lang === "zh" ? "作品" : "Work"}</Link>
           <button className="nav-lang" onClick={toggleLang}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
             {lang === "zh" ? "EN" : "中"}
@@ -34,7 +34,7 @@ export default function Wechat() {
             {lang === "zh" ? "请扫描二维码添加微信 · " : "Scan the QR code to add WeChat · "}
             <strong>15875591020</strong>
           </p>
-          <Link to="/" className="wechat-back">← {lang === "zh" ? "返回首页" : "Back to Home"}</Link>
+          <Link to="/entry" className="wechat-back">← {lang === "zh" ? "返回作品入口" : "Back to Work Entry"}</Link>
         </div>
       </section>
     </div>

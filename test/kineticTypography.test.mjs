@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { calculateGlyphVariation } from "../src/utils/kineticTypography.js";
 
 test("keeps distant glyphs at the TextPressure resting axes", () => {
@@ -16,4 +17,11 @@ test("interpolates every axis for nearby glyphs", () => {
   assert.ok(variation.weight > 100 && variation.weight < 900);
   assert.ok(variation.width > 25 && variation.width < 151);
   assert.ok(variation.italic > 0 && variation.italic < 1);
+});
+
+test("prelude renders a single PORTFOLIO title", async () => {
+  const source = await readFile(new URL("../src/pages/Prelude.jsx", import.meta.url), "utf8");
+
+  assert.match(source, /text="PORTFOLIO"/);
+  assert.doesNotMatch(source, /GRAPHIC|DESIGN/);
 });

@@ -1,12 +1,13 @@
 import { useRef } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLanguage } from "../i18n";
 import HoverProjectReveal from "./HoverProjectReveal";
 import LightRays from "./LightRays";
+import usePortfolioReducedMotion from "../hooks/usePortfolioReducedMotion";
 
 export default function InteractiveCover({ onEnter, isExiting = false }) {
   const { lang } = useLanguage();
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePortfolioReducedMotion();
   const wheelLocked = useRef(false);
 
   const enterPortfolio = (destination = "/portfolio") => onEnter?.(destination);

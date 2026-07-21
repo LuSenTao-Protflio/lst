@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import TextPressure from "../components/TextPressure";
 import LightRays from "../components/LightRays";
 import { shouldAdvanceFromKey, shouldAdvanceFromWheel } from "../utils/preludeNavigation";
+import usePortfolioReducedMotion from "../hooks/usePortfolioReducedMotion";
 
 export default function Prelude() {
   const navigate = useNavigate();
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePortfolioReducedMotion();
   const [leaving, setLeaving] = useState(false);
   const lockedRef = useRef(false);
   const timeoutRef = useRef(null);

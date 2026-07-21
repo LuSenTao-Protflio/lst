@@ -1,12 +1,12 @@
 import { useCallback, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import EntryTransition from "../components/EntryTransition";
 import InteractiveCover from "../components/InteractiveCover";
+import usePortfolioReducedMotion from "../hooks/usePortfolioReducedMotion";
 
 export default function Entry() {
   const navigate = useNavigate();
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePortfolioReducedMotion();
   const [transitioning, setTransitioning] = useState(false);
   const transitionLock = useRef(false);
   const destinationRef = useRef("/portfolio");

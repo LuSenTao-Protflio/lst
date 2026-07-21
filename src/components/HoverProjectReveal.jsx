@@ -1,14 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import projects from "../data/projects";
 import { useLanguage } from "../i18n";
+import usePortfolioReducedMotion from "../hooks/usePortfolioReducedMotion";
 
 const PROXIMITY_RADIUS = 148;
 const SMOOTHING_MS = 110;
 
 export default function HoverProjectReveal() {
   const { t } = useLanguage();
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePortfolioReducedMotion();
   const [hovered, setHovered] = useState(null);
   const [finePointer, setFinePointer] = useState(false);
   const rowRefs = useRef([]);

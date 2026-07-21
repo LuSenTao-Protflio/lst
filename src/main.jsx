@@ -8,6 +8,7 @@ import "@fontsource/manrope/700.css";
 import "@fontsource/manrope/800.css";
 import App from "./App";
 import { LanguageProvider } from "./i18n";
+import { FORCE_FULL_MOTION } from "./config/motion";
 import "./styles.css";
 
 const redirect = new URLSearchParams(window.location.search).get("redirect");
@@ -17,7 +18,7 @@ if (redirect) {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <MotionConfig reducedMotion="never">
+    <MotionConfig reducedMotion={FORCE_FULL_MOTION ? "never" : "user"}>
       <LanguageProvider>
         <App />
       </LanguageProvider>

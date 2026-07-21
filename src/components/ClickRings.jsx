@@ -6,9 +6,8 @@ export default function ClickRings() {
 
   useEffect(() => {
     const finePointer = window.matchMedia("(pointer: fine)");
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const onPointerDown = (event) => {
-      if (!finePointer.matches || reducedMotion.matches || !event.isPrimary || event.button !== 0) return;
+      if (!finePointer.matches || !event.isPrimary || event.button !== 0) return;
       const id = `${event.timeStamp}-${event.clientX}-${event.clientY}`;
       setRings((current) => [...current, { id, x: event.clientX, y: event.clientY }]);
       const timer = window.setTimeout(() => {

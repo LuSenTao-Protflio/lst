@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { MotionConfig } from "framer-motion";
 import "@fontsource/manrope/400.css";
 import "@fontsource/manrope/500.css";
 import "@fontsource/manrope/600.css";
@@ -16,8 +17,10 @@ if (redirect) {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <LanguageProvider>
-      <App />
-    </LanguageProvider>
+    <MotionConfig reducedMotion="never">
+      <LanguageProvider>
+        <App />
+      </LanguageProvider>
+    </MotionConfig>
   </React.StrictMode>,
 );

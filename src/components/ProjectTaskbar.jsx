@@ -10,7 +10,7 @@ export default function ProjectTaskbar({ project, title }) {
 
   return (
     <nav className="project-taskbar" aria-label={lang === "zh" ? "项目详情导航" : "Project detail navigation"}>
-      <Link to="/portfolio#work" className="project-taskbar-back">
+      <Link to={`/portfolio#${project.id}`} className="project-taskbar-back">
         <span className="project-taskbar-back-long">← {lang === "zh" ? "返回作品集" : "Back to work"}</span>
         <span className="project-taskbar-back-short">← {lang === "zh" ? "返回" : "Back"}</span>
       </Link>

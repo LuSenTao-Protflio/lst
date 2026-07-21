@@ -1,17 +1,17 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "../i18n";
-import hero from "../assets/daily-reading/hero.jpg";
-import systemWhite from "../assets/daily-reading/system-white.jpg";
-import exchangeCoffee from "../assets/daily-reading/exchange-coffee.jpg";
-import exchangeBook from "../assets/daily-reading/exchange-book.jpg";
-import exchangeVegetable from "../assets/daily-reading/exchange-vegetable.jpg";
-import exchangePlant from "../assets/daily-reading/exchange-plant.jpg";
-import fortyTwoDays from "../assets/daily-reading/forty-two-days.jpg";
-import themeCommute from "../assets/daily-reading/theme-commute.jpg";
-import themeMidday from "../assets/daily-reading/theme-midday.jpg";
-import themeEvening from "../assets/daily-reading/theme-evening.jpg";
-import schedule from "../assets/daily-reading/schedule.jpg";
-import closingMark from "../assets/daily-reading/closing-mark.jpg";
+import hero from "../assets/daily-reading/hero.webp";
+import systemWhite from "../assets/daily-reading/system-white.webp";
+import exchangeCoffee from "../assets/daily-reading/exchange-coffee.webp";
+import exchangeBook from "../assets/daily-reading/exchange-book.webp";
+import exchangeVegetable from "../assets/daily-reading/exchange-vegetable.webp";
+import exchangePlant from "../assets/daily-reading/exchange-plant.webp";
+import fortyTwoDays from "../assets/daily-reading/forty-two-days.webp";
+import themeCommute from "../assets/daily-reading/theme-commute.webp";
+import themeMidday from "../assets/daily-reading/theme-midday.webp";
+import themeEvening from "../assets/daily-reading/theme-evening.webp";
+import schedule from "../assets/daily-reading/schedule.webp";
+import closingMark from "../assets/daily-reading/closing-mark.webp";
 
 const copy = {
   zh: {

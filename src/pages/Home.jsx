@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import LightRays from "../components/LightRays";
 import projects from "../data/projects";
 import { useLanguage } from "../i18n";
-import photoImg from "../../assets/IMG_2345.png";
+import photoImg from "../../assets/IMG_2345.webp";
 import SiteFooter from "../components/SiteFooter";
 import ProjectFolderReveal from "../components/ProjectFolderReveal";
 

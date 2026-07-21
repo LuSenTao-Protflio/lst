@@ -1,19 +1,19 @@
-const portfolioImages = import.meta.glob("../../assets/portfolio-pages/*.{jpg,png,jpeg}", {
+const portfolioImages = import.meta.glob("../../assets/portfolio-pages/*.{webp,jpg,png,jpeg}", {
   eager: true,
   import: "default",
 });
 const getP = (name) => portfolioImages[`../../assets/portfolio-pages/${name}`];
-const dailyReadingImages = import.meta.glob("../assets/daily-reading/*.{jpg,png,jpeg}", {
+const dailyReadingImages = import.meta.glob("../assets/daily-reading/*.{webp,jpg,png,jpeg}", {
   eager: true,
   import: "default",
 });
 const getD = (name) => dailyReadingImages[`../assets/daily-reading/${name}`];
-const whelkImages = import.meta.glob("../assets/whelk/*.{jpg,png,jpeg}", {
+const whelkImages = import.meta.glob("../assets/whelk/*.{webp,jpg,png,jpeg}", {
   eager: true,
   import: "default",
 });
 const getW = (name) => whelkImages[`../assets/whelk/${name}`];
-const woofImages = import.meta.glob("../assets/woof/*.{jpg,png,jpeg}", {
+const woofImages = import.meta.glob("../assets/woof/*.{webp,jpg,png,jpeg}", {
   eager: true,
   import: "default",
 });

@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/entry", "destination": "/index.html" },
+    { "source": "/portfolio", "destination": "/index.html" },
+    { "source": "/project/:path*", "destination": "/index.html" },
+    { "source": "/daily-reading", "destination": "/index.html" },
+    { "source": "/wechat", "destination": "/index.html" }
+  ]
+}

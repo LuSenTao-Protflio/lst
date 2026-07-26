@@ -6,11 +6,17 @@
     <title>Redirecting…</title>
     <script>
       (function () {
-        var base = "/lst/";
-        var path = window.location.pathname.indexOf(base) === 0
-          ? window.location.pathname.slice(base.length)
-          : "";
-        window.location.replace(base + "?redirect=" + encodeURIComponent(path + window.location.search + window.location.hash));
+        var githubBase = "/lst/";
+        var isGithubPages = window.location.pathname.indexOf(githubBase) === 0;
+        var base = isGithubPages ? githubBase : "/";
+        var path = isGithubPages
+          ? window.location.pathname.slice(githubBase.length)
+          : window.location.pathname.slice(1);
+        var target = path + window.location.search + window.location.hash;
+
+        window.location.replace(
+          base + "?redirect=" + encodeURIComponent(target),
+        );
       })();
     </script>
   </head>

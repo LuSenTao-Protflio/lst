@@ -12,10 +12,18 @@ import useScrollActivatedFolder from "../hooks/useScrollActivatedFolder";
 export default function Home() {
   const { lang, setLang, t } = useLanguage();
   const [activeFolder, setActiveFolder] = useState(null);
-  const [hoverFolders, setHoverFolders] = useState(false);
+  const [hoverFolders, setHoverFolders] = useState(() => (
+    typeof window !== "undefined"
+    && typeof window.matchMedia === "function"
+    && window.matchMedia("(hover: hover) and (pointer: fine)").matches
+  ));
   const toggleLang = () => setLang(l => (l === "zh" ? "en" : "zh"));
 
   useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+      return undefined;
+    }
+
     const query = window.matchMedia("(hover: hover) and (pointer: fine)");
     const sync = () => setHoverFolders(query.matches);
     sync();

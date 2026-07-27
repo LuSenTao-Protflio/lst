@@ -18,6 +18,29 @@ test("touch project folders activate from the viewport center without a scroll l
   assert.doesNotMatch(hook, /addEventListener\(["']scroll["']/);
 });
 
+test("the observer chooses from every project still intersecting the center band", async () => {
+  const hook = await readFile(
+    new URL("../src/hooks/useScrollActivatedFolder.js", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(hook, /const intersectingNodes = new Set\(\)/);
+  assert.match(hook, /intersectingNodes\.add\(entry\.target\)/);
+  assert.match(hook, /intersectingNodes\.delete\(entry\.target\)/);
+  assert.match(hook, /Array\.from\(intersectingNodes\)/);
+  assert.match(hook, /getBoundingClientRect\(\)/);
+  assert.match(hook, /intersectingNodes\.size === 0[\s\S]*onChange\(null\)/);
+  assert.match(hook, /intersectingNodes\.clear\(\)[\s\S]*observer\.disconnect\(\)/);
+});
+
+test("fine-pointer devices start with folder hovering instead of scroll activation", async () => {
+  const home = await readFile(new URL("../src/pages/Home.jsx", import.meta.url), "utf8");
+
+  assert.match(home, /useState\(\(\) => \(/);
+  assert.match(home, /typeof window !== "undefined"/);
+  assert.match(home, /window\.matchMedia\("\(hover: hover\) and \(pointer: fine\)"\)\.matches/);
+});
+
 test("project blocks remain first-tap detail links", async () => {
   const home = await readFile(new URL("../src/pages/Home.jsx", import.meta.url), "utf8");
 

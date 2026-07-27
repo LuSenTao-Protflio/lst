@@ -17,30 +17,37 @@ export default function useScrollActivatedFolder({ enabled, onChange }) {
     );
     if (projectNodes.length === 0) return undefined;
 
+    const intersectingNodes = new Set();
     const observer = new IntersectionObserver(
       (entries) => {
-        const entering = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => {
-            const center = window.innerHeight / 2;
-            const aDistance = Math.abs(a.boundingClientRect.top + a.boundingClientRect.height / 2 - center);
-            const bDistance = Math.abs(b.boundingClientRect.top + b.boundingClientRect.height / 2 - center);
-            return aDistance - bDistance;
-          });
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            intersectingNodes.add(entry.target);
+          } else {
+            intersectingNodes.delete(entry.target);
+          }
+        });
 
-        if (entering.length > 0) {
-          const nextId = entering[0].target.dataset.projectId;
-          activeIdRef.current = nextId;
-          onChange(nextId);
+        if (intersectingNodes.size === 0) {
+          if (activeIdRef.current !== null) {
+            activeIdRef.current = null;
+            onChange(null);
+          }
           return;
         }
 
-        const activeEntry = entries.find(
-          (entry) => entry.target.dataset.projectId === activeIdRef.current,
-        );
-        if (activeEntry && !activeEntry.isIntersecting) {
-          activeIdRef.current = null;
-          onChange(null);
+        const center = window.innerHeight / 2;
+        const nextNode = Array.from(intersectingNodes).reduce((closest, node) => {
+          const nodeRect = node.getBoundingClientRect();
+          const closestRect = closest.getBoundingClientRect();
+          const nodeDistance = Math.abs(nodeRect.top + nodeRect.height / 2 - center);
+          const closestDistance = Math.abs(closestRect.top + closestRect.height / 2 - center);
+          return nodeDistance < closestDistance ? node : closest;
+        });
+        const nextId = nextNode.dataset.projectId;
+        if (activeIdRef.current !== nextId) {
+          activeIdRef.current = nextId;
+          onChange(nextId);
         }
       },
       { rootMargin: "-34% 0px -34% 0px", threshold: 0 },
@@ -49,8 +56,9 @@ export default function useScrollActivatedFolder({ enabled, onChange }) {
     projectNodes.forEach((node) => observer.observe(node));
 
     return () => {
-      observer.disconnect();
+      intersectingNodes.clear();
       activeIdRef.current = null;
+      observer.disconnect();
     };
   }, [enabled, onChange]);
 }

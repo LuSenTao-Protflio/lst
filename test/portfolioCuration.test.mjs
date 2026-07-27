@@ -15,16 +15,16 @@ test("portfolio curation uses approved order and routed image sets", async () =>
   assert.deepEqual(ids, ["whelk", "daily-reading", "woof", "memory", "gala", "storyteller", "misc"]);
   assert.match(projects, /previewImages:/);
   assert.match(projects, /detailImages:/);
-  assert.match(projects, /whelk-main-preview\.jpg/);
-  assert.match(projects, /daily-preview-illustration\.jpg/);
-  assert.match(projects, /daily-preview-system\.jpg/);
+  assert.match(projects, /whelk-main-preview\.webp/);
+  assert.match(projects, /daily-preview-illustration\.webp/);
+  assert.match(projects, /daily-preview-system\.webp/);
 
   for (const name of [
-    "research-demographics.jpg",
-    "research-interviews.jpg",
-    "research-functions.jpg",
-    "research-feature-system.jpg",
-    "research-moodboard.jpg",
+    "research-demographics.webp",
+    "research-interviews.webp",
+    "research-functions.webp",
+    "research-feature-system.webp",
+    "research-moodboard.webp",
   ]) {
     assert.match(projects, new RegExp(name));
   }

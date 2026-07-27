@@ -9,7 +9,7 @@ test("WHELK interleaves five physical application images", async () => {
     readFile(new URL("../src/styles.css", import.meta.url), "utf8"),
   ]);
 
-  for (const name of ["wash-label.jpg", "rug.jpg", "fabric-bag.jpg", "charm.jpg", "mugs.jpg"]) {
+  for (const name of ["wash-label.webp", "rug.webp", "fabric-bag.webp", "charm.webp", "mugs.webp"]) {
     assert.match(projects, new RegExp(name));
   }
   assert.match(projects, /storyLayout:/);

@@ -183,50 +183,47 @@ export default function Home() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: i * 0.06 }}
             >
-              <div
-                className="project-summary"
+              <Link
+                to={`/project/${p.id}`}
+                className="project-hit-area"
+                aria-label={`查看${projectT.title}完整项目`}
                 onPointerEnter={() => hoverFolders && setActiveFolder(p.id)}
                 onPointerLeave={() => hoverFolders && setActiveFolder(null)}
                 onFocusCapture={() => setActiveFolder(p.id)}
                 onBlurCapture={(event) => {
                   if (!event.currentTarget.contains(event.relatedTarget)) setActiveFolder(null);
                 }}
-                onClick={(event) => {
-                  if (!hoverFolders && !event.target.closest("a")) {
-                    setActiveFolder(current => current === p.id ? null : p.id);
-                  }
-                }}
               >
-                <div className="project-body">
-                  <span className="project-num">{p.num}</span>
-                  <div className="project-tags">
-                    {p.tags.map((t) => <span key={t}>{t}</span>)}
+                <div className="project-summary">
+                  <div className="project-body">
+                    <span className="project-num">{p.num}</span>
+                    <div className="project-tags">
+                      {p.tags.map((t) => <span key={t}>{t}</span>)}
+                    </div>
+                    <h2 className="project-title">{projectT.title}</h2>
+                    <p className="project-en">{projectT.en}</p>
+                    <p className="project-desc">{projectT.desc}</p>
                   </div>
-                  <h2 className="project-title">{projectT.title}</h2>
-                  <p className="project-en">{projectT.en}</p>
-                  <p className="project-desc">{projectT.desc}</p>
+                  <ProjectFolderReveal project={p} title={projectT.title} open={activeFolder === p.id} />
                 </div>
-                <ProjectFolderReveal project={p} title={projectT.title} open={activeFolder === p.id} />
-              </div>
 
-              {p.images.length > 0 && (
-                <div className="project-grid">
-                  {p.images.slice(0, 3).map((src, j) => (
-                    <motion.div
-                      key={src}
-                      className="grid-item"
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-40px" }}
-                      transition={{ duration: 0.45, delay: 0.05 * j }}
-                    >
-                      <Link to={`/project/${p.id}`}>
+                {p.images.length > 0 && (
+                  <div className="project-grid">
+                    {p.images.slice(0, 3).map((src, j) => (
+                      <motion.div
+                        key={src}
+                        className="grid-item"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-40px" }}
+                        transition={{ duration: 0.45, delay: 0.05 * j }}
+                      >
                         <img src={src} alt="" loading={j > 2 ? "lazy" : "eager"} />
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-              )}
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
+              </Link>
             </motion.div>
           );
         })}

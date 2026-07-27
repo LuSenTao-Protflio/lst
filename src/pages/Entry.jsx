@@ -30,7 +30,7 @@ export default function Entry() {
 
   return (
     <main className="entry-page">
-      <InteractiveCover onEnter={beginEntry} />
+      <InteractiveCover onEnter={beginEntry} isExiting={transitioning} />
       <EntryTransition active={transitioning} onComplete={finishEntry} />
     </main>
   );

@@ -3,3 +3,4 @@ dist
 .netlify
 .vercel
 .DS_Store
+.worktrees

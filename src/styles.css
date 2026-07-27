@@ -16,7 +16,7 @@
   --entry-olive-deep: #383e20;
   --entry-olive-glass: rgba(81,89,44,.68);
   --line: rgba(255,253,245,.18);
-  --nav-glass: rgba(16,18,13,.76);
+  --nav-glass: rgba(230,255,26,.86);
   --font: "Instrument Sans", "PingFang SC", "Noto Sans SC", "Helvetica Neue", system-ui, sans-serif;
   --max-w: 1240px;
   --pad: clamp(1.2rem, 4vw, 3rem);
@@ -103,13 +103,13 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 @media(pointer:fine){html,body,a,button,[role="button"]{cursor:none!important}}
 
 /* ── Nav ── */
-.nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:100;display:flex;justify-content:space-between;align-items:center;gap:1.6rem;padding:.55rem 1.2rem;font-size:.78rem;font-weight:500;max-width:480px;width:calc(100% - 24px);border-radius:40px;background:var(--nav-glass);backdrop-filter:blur(30px) saturate(145%);-webkit-backdrop-filter:blur(30px) saturate(145%);border:1px solid rgba(255,253,245,.58);box-shadow:inset 0 1px 0 rgba(255,253,245,.65),0 10px 32px rgba(58,58,58,.14)}
-.nav-logo{font-size:.85rem;font-weight:700;letter-spacing:-.01em;white-space:nowrap;color:var(--fg)}
+.nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:100;display:flex;justify-content:space-between;align-items:center;gap:1.6rem;padding:.55rem 1.2rem;font-size:.78rem;font-weight:500;max-width:480px;width:calc(100% - 24px);border-radius:40px;background:var(--nav-glass);color:var(--deep);backdrop-filter:blur(30px) saturate(145%);-webkit-backdrop-filter:blur(30px) saturate(145%);border:1px solid rgba(255,253,245,.58);box-shadow:inset 0 1px 0 rgba(255,253,245,.65),0 10px 32px rgba(58,58,58,.14)}
+.nav-logo{font-size:.85rem;font-weight:700;letter-spacing:-.01em;white-space:nowrap;color:var(--deep)}
 .nav-links{display:flex;gap:1.4rem}
 .nav-link{opacity:.5;transition:opacity .2s;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase}
 .nav-link:hover{opacity:1}
-.nav-lang-btn{display:flex;align-items:center;justify-content:center;gap:4px;min-width:32px;height:32px;padding:0 8px;border-radius:16px;transition:background .2s;color:var(--fg);opacity:.6}
-.nav-lang-btn:hover{background:rgba(255,255,255,.1);opacity:1}
+.nav-lang-btn{display:flex;align-items:center;justify-content:center;gap:4px;min-width:32px;height:32px;padding:0 8px;border-radius:16px;transition:background .2s;color:var(--deep);opacity:.6}
+.nav-lang-btn:hover{background:rgba(16,18,13,.08);opacity:1}
 .nav-lang-label{font-size:.6rem;font-weight:600;letter-spacing:.04em}
 
 /* ── Hero ── */
@@ -566,8 +566,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 @media(prefers-reduced-transparency:reduce){
   .prelude-glass{background:linear-gradient(126deg,rgb(82,91,46),rgb(57,64,31) 48%,rgb(30,35,14));backdrop-filter:none;-webkit-backdrop-filter:none}
   .cover-glass-veil{background:linear-gradient(125deg,rgb(88,98,51),rgb(65,72,36) 48%,rgb(42,48,23));backdrop-filter:none;-webkit-backdrop-filter:none}
-  .nav,.floating-glass-nav,.project-taskbar{background:rgba(230,255,26,.96);backdrop-filter:none;-webkit-backdrop-filter:none}
-  .nav,.nav-logo,.nav-lang-btn{color:var(--deep)}
+  .floating-glass-nav,.project-taskbar{background:rgba(230,255,26,.96);backdrop-filter:none;-webkit-backdrop-filter:none}
+  .nav{background:var(--nav-glass);color:var(--deep);backdrop-filter:blur(30px) saturate(145%);-webkit-backdrop-filter:blur(30px) saturate(145%)}
+  .nav-logo,.nav-lang-btn{color:var(--deep)}
   .nav-lang-btn:hover{background:rgba(16,18,13,.08)}
   .info-photo-contact-card{background:#c9dd19;backdrop-filter:none;-webkit-backdrop-filter:none}
 }

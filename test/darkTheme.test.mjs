@@ -11,6 +11,8 @@ test("portfolio surfaces use the dark theme tokens", () => {
   assert.match(styles, /\.work\{[^}]*background:var\(--bg\);color:var\(--fg\)/);
   assert.match(styles, /\.directory\{[^}]*background:var\(--bg\);color:var\(--fg\)/);
   assert.match(styles, /body::before\{[^}]*animation:ambient-hero-drift/);
+  assert.match(styles, /--nav-glass:\s*rgba\(230,255,26,\.86\)/);
+  assert.match(styles, /\.nav\{[^}]*background:var\(--nav-glass\);color:var\(--deep\)/);
 });
 
 test("dark content keeps readable muted text and image frames", () => {

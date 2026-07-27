@@ -7,6 +7,7 @@ import { useLanguage } from "../i18n";
 import photoImg from "../../assets/IMG_2345.webp";
 import SiteFooter from "../components/SiteFooter";
 import ProjectFolderReveal from "../components/ProjectFolderReveal";
+import useScrollActivatedFolder from "../hooks/useScrollActivatedFolder";
 
 export default function Home() {
   const { lang, setLang, t } = useLanguage();
@@ -21,6 +22,11 @@ export default function Home() {
     query.addEventListener("change", sync);
     return () => query.removeEventListener("change", sync);
   }, []);
+
+  useScrollActivatedFolder({
+    enabled: !hoverFolders,
+    onChange: setActiveFolder,
+  });
 
   return (
     <div className="app">
@@ -188,6 +194,7 @@ export default function Home() {
               key={p.id}
               className="project"
               id={p.id}
+              data-project-id={p.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}

@@ -32,11 +32,11 @@ test("phone shell uses safe viewport sizing, fitted hero copy, and touch targets
   const styles = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
   const phone = mediaBlock(styles, "max-width:599px");
 
-  assert.match(phone, /\.nav\{[^}]*width:calc\(100% - 24px\)[^}]*min-height:48px/);
+  assert.match(phone, /\.nav\{[^}]*width:calc\(100% - 24px\)[^}]*min-height:48px[^}]*display:grid[^}]*grid-template-columns:minmax\(72px,1fr\) auto 44px/);
   assert.match(phone, /\.nav-link,\s*\.nav-lang-btn\{[^}]*min-height:44px/);
-  assert.match(phone, /\.nav-logo\{[^}]*font-size:\.72rem[^}]*flex:0 1 auto/);
-  assert.match(phone, /\.nav-links\{[^}]*gap:\.35rem[^}]*flex:0 0 auto/);
-  assert.match(phone, /\.nav-lang-btn\{[^}]*min-width:44px[^}]*flex:0 0 auto/);
+  assert.match(phone, /\.nav-logo\{[^}]*font-size:\.72rem[^}]*justify-self:start/);
+  assert.match(phone, /\.nav-links\{[^}]*gap:\.5rem[^}]*justify-self:center/);
+  assert.match(phone, /\.nav-lang-btn\{[^}]*min-width:44px[^}]*justify-self:end/);
   assert.match(phone, /\.hero\{[^}]*min-height:100svh[^}]*height:auto/);
   assert.match(phone, /\.hero-title\{[^}]*font-size:clamp\(3\.25rem,17vw,4\.75rem\)/);
   assert.match(phone, /\.hero-title-en-display\{[^}]*font-size:clamp\(2\.75rem,14vw,4\.75rem\)/);

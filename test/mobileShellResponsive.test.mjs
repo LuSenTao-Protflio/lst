@@ -17,7 +17,7 @@ function mediaBlock(styles, query) {
   throw new Error(`unterminated @media(${query})`);
 }
 
-test("phone shell uses safe viewport sizing and touch targets", async () => {
+test("phone shell uses safe viewport sizing, fitted hero copy, and touch targets", async () => {
   const styles = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
   const phone = mediaBlock(styles, "max-width:599px");
 
@@ -28,6 +28,7 @@ test("phone shell uses safe viewport sizing and touch targets", async () => {
   assert.match(phone, /\.nav-lang-btn\{[^}]*min-width:44px[^}]*flex:0 0 auto/);
   assert.match(phone, /\.hero\{[^}]*min-height:100svh[^}]*height:auto/);
   assert.match(phone, /\.hero-title\{[^}]*font-size:clamp\(3\.25rem,17vw,4\.75rem\)/);
+  assert.match(phone, /\.hero-title-en-display\{[^}]*font-size:clamp\(2\.75rem,14vw,4\.75rem\)/);
 });
 
 test("profile changes from centered phone layout to portrait-tablet columns", async () => {

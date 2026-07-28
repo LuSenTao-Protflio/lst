@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import projects from "../data/projects";
 import { useLanguage } from "../i18n";
 import usePortfolioReducedMotion from "../hooks/usePortfolioReducedMotion";
@@ -12,11 +12,16 @@ export default function HoverProjectReveal() {
   const reduceMotion = usePortfolioReducedMotion();
   const [hovered, setHovered] = useState(null);
   const [finePointer, setFinePointer] = useState(false);
+  const [mobileCoarsePointer, setMobileCoarsePointer] = useState(false);
+  const [activeTouchIndex, setActiveTouchIndex] = useState(null);
   const rowRefs = useRef([]);
   const targetRef = useRef([]);
   const currentRef = useRef([]);
   const frameRef = useRef(null);
   const lastFrameRef = useRef(0);
+  const touchPointerRef = useRef(null);
+  const touchX = useMotionValue(0);
+  const touchY = useMotionValue(0);
 
   const runFrame = useCallback((now) => {
     const dt = Math.min((now - lastFrameRef.current) / 1000, 0.05);
@@ -50,6 +55,24 @@ export default function HoverProjectReveal() {
   }, [startLoop]);
 
   const handlePointerMove = useCallback((event) => {
+    if (event.pointerType === "touch" && mobileCoarsePointer && touchPointerRef.current === event.pointerId) {
+      const previewWidth = Math.min(window.innerWidth * 0.48, 184);
+      const previewHeight = previewWidth / 1.6;
+      touchX.set(Math.max(12, Math.min(event.clientX + 18, window.innerWidth - previewWidth - 12)));
+      touchY.set(Math.max(12, Math.min(event.clientY - previewHeight - 20, window.innerHeight - previewHeight - 12)));
+
+      const nextIndex = rowRefs.current.findIndex((row) => {
+        if (!row) return false;
+        const rect = row.getBoundingClientRect();
+        return event.clientX >= rect.left
+          && event.clientX <= rect.right
+          && event.clientY >= rect.top
+          && event.clientY <= rect.bottom;
+      });
+      setActiveTouchIndex(nextIndex >= 0 && projects[nextIndex]?.id !== "misc" ? nextIndex : null);
+      return;
+    }
+
     if (!finePointer || reduceMotion) return;
 
     const nextTargets = rowRefs.current.map((row) => {
@@ -63,7 +86,23 @@ export default function HoverProjectReveal() {
     targetRef.current = nextTargets;
     setHovered(nextTargets[closest] > 0 ? closest : null);
     startLoop();
-  }, [finePointer, reduceMotion, startLoop]);
+  }, [finePointer, mobileCoarsePointer, reduceMotion, startLoop, touchX, touchY]);
+
+  const handlePointerDown = useCallback((event) => {
+    if (!mobileCoarsePointer || event.pointerType !== "touch") return;
+    touchPointerRef.current = event.pointerId;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    handlePointerMove(event);
+  }, [handlePointerMove, mobileCoarsePointer]);
+
+  const finishTouch = useCallback((event) => {
+    if (event.pointerType !== "touch" || touchPointerRef.current !== event.pointerId) return;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    touchPointerRef.current = null;
+    setActiveTouchIndex(null);
+  }, []);
 
   useEffect(() => {
     const query = window.matchMedia("(pointer:fine)");
@@ -73,21 +112,41 @@ export default function HoverProjectReveal() {
     return () => query.removeEventListener("change", sync);
   }, []);
 
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 599px) and (pointer: coarse)");
+    const sync = () => {
+      setMobileCoarsePointer(query.matches);
+      if (!query.matches) {
+        touchPointerRef.current = null;
+        setActiveTouchIndex(null);
+      }
+    };
+    sync();
+    query.addEventListener("change", sync);
+    return () => query.removeEventListener("change", sync);
+  }, []);
+
   useEffect(() => () => {
     if (frameRef.current != null) cancelAnimationFrame(frameRef.current);
   }, []);
+
+  const touchProject = activeTouchIndex == null ? null : projects[activeTouchIndex];
 
   return (
     <div className="cover-project-reveal">
       <div
         className="cover-project-list"
         role="list"
+        onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
+        onPointerUp={finishTouch}
+        onPointerCancel={finishTouch}
+        onLostPointerCapture={finishTouch}
         onPointerLeave={clearProximity}
       >
         {projects.map((project, index) => {
           const translated = t(`projects.${project.id}`);
-          const active = hovered === index;
+          const active = hovered === index || activeTouchIndex === index;
           return (
             <motion.div
               key={project.id}
@@ -125,6 +184,28 @@ export default function HoverProjectReveal() {
           );
         })}
       </div>
+      <AnimatePresence>
+        {mobileCoarsePointer && touchProject && touchProject.id !== "misc" && (
+          <motion.div
+            className="cover-project-touch-preview"
+            style={{ x: touchX, y: touchY }}
+            initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: reduceMotion ? 1 : 0.96 }}
+            transition={{ duration: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
+            aria-hidden="true"
+          >
+            <motion.img
+              key={touchProject.id}
+              src={touchProject.hero}
+              alt=""
+              initial={{ opacity: reduceMotion ? 1 : 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: reduceMotion ? 0 : 0.16 }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

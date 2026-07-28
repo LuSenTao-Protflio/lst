@@ -32,7 +32,7 @@ test("phone shell uses safe viewport sizing, fitted hero copy, and touch targets
   const styles = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
   const phone = mediaBlock(styles, "max-width:599px");
 
-  assert.match(phone, /\.nav\{[^}]*width:calc\(100% - 24px\)[^}]*min-height:48px[^}]*display:grid[^}]*grid-template-columns:minmax\(72px,1fr\) auto 44px/);
+  assert.match(phone, /\.nav\{[^}]*width:calc\(100% - 24px\)[^}]*min-height:48px[^}]*display:grid[^}]*grid-template-columns:minmax\(0,1fr\) auto minmax\(0,1fr\)/);
   assert.match(phone, /\.nav-link,\s*\.nav-lang-btn\{[^}]*min-height:44px/);
   assert.match(phone, /\.nav-logo\{[^}]*font-size:\.72rem[^}]*justify-self:start/);
   assert.match(phone, /\.nav-links\{[^}]*gap:\.5rem[^}]*justify-self:center/);

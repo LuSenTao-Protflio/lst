@@ -592,3 +592,39 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .wechat-phone strong{color:var(--fg);font-weight:600}
 .wechat-back{font-size:.78rem;color:var(--accent);text-decoration:none;transition:opacity .2s}
 .wechat-back:hover{opacity:.7}
+
+/* ── GitHub mobile/tablet responsive overrides ── */
+img,video,canvas{max-width:100%}
+#info,#directory,#work,#contact,.project{scroll-margin-top:88px}
+
+@media(max-width:899px){
+  html,body,#root{max-width:100%;overflow-x:clip}
+}
+
+@media(max-width:599px){
+  :root{--pad:1.15rem}
+  #info,#directory,#work,#contact,.project{scroll-margin-top:72px}
+  .prelude,.interactive-cover{min-height:100svh;height:auto}
+  .cover-project-preview{display:none}
+  .nav{width:calc(100% - 24px);min-height:48px;padding:.35rem .8rem;gap:.65rem;flex-wrap:nowrap}
+  .nav-links{gap:.55rem}
+  .nav-link,.nav-lang-btn{min-height:44px;display:inline-flex;align-items:center}
+  .nav-link{font-size:.58rem}
+  .nav-lang-btn{height:44px;padding:0 .35rem}
+  .hero{min-height:100svh;height:auto;padding:6rem var(--pad) 4rem}
+  .hero-content{padding-top:1rem}
+  .hero-title{font-size:clamp(3.25rem,17vw,4.75rem);line-height:.86}
+  .hero-meta{grid-template-columns:1fr;gap:.65rem;margin-top:2rem}
+  .hero-meta span:nth-child(2),.hero-meta span:nth-child(3){text-align:left}
+  .info{padding:3rem var(--pad) 6rem}
+  .info-layout{grid-template-columns:1fr;gap:2.25rem}
+  .info-photo-wrap{position:static;width:min(100%,320px);max-width:none;margin-inline:auto}
+  .info-row{display:grid;grid-template-columns:1fr;gap:.45rem;padding-bottom:1.35rem}
+  .info-row-label{padding-top:0}
+}
+
+@media(min-width:600px) and (max-width:899px){
+  .info-layout{grid-template-columns:minmax(220px,240px) minmax(0,1fr);gap:clamp(1.75rem,4vw,2.25rem)}
+  .info-photo-wrap{position:static;max-width:none}
+  .info-photo-contact-card{width:88%}
+}

@@ -87,3 +87,22 @@ test("portrait tablet keeps all three project images on one row", async () => {
 
   assert.match(tablet, /\.project-grid\{[^}]*display:grid[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
 });
+
+test("portrait tablet folder fan stays within its viewport-side gutter", async () => {
+  const styles = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+  const tablet = mediaBlock(styles, "min-width:600px) and (max-width:899px");
+
+  assert.match(tablet, /\.project-inline-folder-card\{[^}]*left:-66px[^}]*width:132px/);
+  assert.match(
+    tablet,
+    /\.project-inline-folder\.is-open \.project-inline-folder-card\.card-1,[^}]*\{[^}]*translate3d\(-56px,-68px,0\) scale\(1\) rotate\(-8deg\)/,
+  );
+  assert.match(
+    tablet,
+    /\.project-inline-folder\.is-open \.project-inline-folder-card\.card-2,[^}]*\{[^}]*translate3d\(0,-92px,0\) scale\(1\) rotate\(1deg\)/,
+  );
+  assert.match(
+    tablet,
+    /\.project-inline-folder\.is-open \.project-inline-folder-card\.card-3,[^}]*\{[^}]*translate3d\(56px,-66px,0\) scale\(1\) rotate\(8deg\)/,
+  );
+});

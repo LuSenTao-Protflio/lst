@@ -194,7 +194,10 @@
     }
 
     function makeArtboards(doc) {
-        var cursorTop = 0;
+        // Keep the 9,430 pt vertical stack inside Illustrator's legacy canvas
+        // coordinate range. Starting at 8,000 avoids CoOA errors on negative
+        // artboard origins while leaving the final board safely above -1,500.
+        var cursorTop = 8000;
         for (var i = 0; i < boards.length; i++) {
             boards[i].rect = [0, cursorTop, W, cursorTop - boards[i].height];
             var artboard;
@@ -210,13 +213,9 @@
     }
 
     function buildCover(typeLayer, graphicsLayer, imageLayer, annotationLayer, board) {
-        placeImage(imageLayer, "B01-HERO", board, ASSETS.hero, 0, 0, W, board.height, "cover");
-        addRect(graphicsLayer, "B01-LEFT-VEIL", board, 0, 0, 620, board.height, [255, 207, 0]);
-        graphicsLayer.pageItems[graphicsLayer.pageItems.length - 1].opacity = 72;
-        addPointText(typeLayer, "B01-INDEX", board, "PROJECT 04 / COMMUNITY EVENT", 48, 54, 12, COLORS.ink, true, 140);
-        addText(typeLayer, "B01-TITLE", board, "天安云谷\r（日常）读书节", 48, 160, 610, 260, 82, COLORS.ink, 86, true, -35);
-        addPointText(typeLayer, "B01-EN", board, "DAILY READING FESTIVAL", 52, 455, 18, COLORS.ink, true, 80);
-        addText(typeLayer, "B01-ROLE", board, "主要负责视觉设计与落地执行\r2025.06.20—07.31 / 42 DAYS", 1010, 650, 360, 84, 14, COLORS.ink, 23, true, 20);
+        addRect(graphicsLayer, "B01-BG", board, 0, 0, W, board.height, COLORS.yellow);
+        placeImage(imageLayer, "B01-HERO", board, ASSETS.hero, 0, 0, W, board.height, "contain");
+        addPointText(typeLayer, "B01-INDEX", board, "PROJECT 04 / COMMUNITY EVENT", 602, 42, 11, COLORS.ink, true, 120);
         addTag(annotationLayer, "B01-SPEC", board, "1440 × 810 / IMAGE FULL BLEED", 1092, 36, 300, true);
     }
 
@@ -301,7 +300,8 @@
         addPointText(typeLayer, "B07-INDEX", board, "06 / CALENDAR & INFORMATION", 72, 68, 12, COLORS.muted, true, 120);
         addText(typeLayer, "B07-TITLE", board, "用一张日历，组织 42 天的活动信息。", 72, 110, 600, 70, 46, COLORS.ink, 52, true, -25);
         addText(typeLayer, "B07-BODY", board, "日期、交换主题、活动名称、地点与二维码入口形成固定层级。颜色同时承担分类功能，帮助参与者在密集日程中快速定位。", 850, 110, 500, 90, 14, COLORS.muted, 25, false, 0);
-        placeImage(imageLayer, "B07-CALENDAR", board, ASSETS.calendar, 310, 220, 820, 690, "contain");
+        placeImage(imageLayer, "B07-CALENDAR-FULL", board, ASSETS.calendar, 72, 220, 320, 690, "contain");
+        placeImage(imageLayer, "B07-CALENDAR-DETAIL", board, ASSETS.calendar, 430, 220, 938, 690, "cover");
         addTag(typeLayer, "B07-SPEC", board, "KEEP CALENDAR TEXT LEGIBLE", 1098, 892, 270, false);
     }
 
@@ -320,7 +320,8 @@
         addPointText(typeLayer, "B09-INDEX", board, "08 / CONTENT COMMUNICATION", 72, 72, 12, COLORS.ink, true, 120);
         addText(typeLayer, "B09-TITLE", board, "从活动机制延伸到人物与内容传播。", 72, 112, 620, 80, 46, COLORS.ink, 52, true, -25);
         addText(typeLayer, "B09-BODY", board, "作者海报延续黄色公共底色、白底标题标签与高对比人物轮廓。人物信息、活动标题和合作方信息按阅读优先级重新组织。", 850, 115, 500, 95, 14, COLORS.ink, 25, false, 0);
-        placeImage(imageLayer, "B09-AUTHORS", board, ASSETS.authors, 390, 235, 660, 610, "contain");
+        placeImage(imageLayer, "B09-AUTHORS-FULL", board, ASSETS.authors, 72, 235, 300, 610, "contain");
+        placeImage(imageLayer, "B09-AUTHORS-DETAIL", board, ASSETS.authors, 410, 235, 958, 610, "cover");
         addTag(typeLayer, "B09-SPEC", board, "CONTENT SERIES / 6 AUTHORS", 1084, 812, 284, false);
     }
 
@@ -363,6 +364,16 @@
         var logFile = new File(LOG_PATH);
         if (logFile.exists) logFile.remove();
         log("Build started");
+
+        // Close only the file produced by this builder so a rerun can replace it
+        // without touching any unrelated document the user has open.
+        for (var openIndex = app.documents.length - 1; openIndex >= 0; openIndex--) {
+            try {
+                if (app.documents[openIndex].saved && app.documents[openIndex].fullName.fsName === new File(OUTPUT_AI).fsName) {
+                    app.documents[openIndex].close(SaveOptions.DONOTSAVECHANGES);
+                }
+            } catch (ignoreOpenDocument) {}
+        }
 
         regularFont = fontByNames(["PingFangSC-Regular", "NotoSansCJKsc-Regular", "ArialMT"]);
         semiboldFont = fontByNames(["PingFangSC-Semibold", "NotoSansCJKsc-Bold", "Arial-BoldMT"]);

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>有请讲书人｜作品集排版参考</title>
+  <style>
+    :root{--paper:#f6f2e8;--cream:#eed795;--gold:#f1ca5f;--copper:#d58346;--orange:#dd5d29;--blue:#6887be;--ink:#271f19;--muted:#706255;--white:#fff;--black:#121110}
+    *{box-sizing:border-box}html{background:#1b1917}body{margin:0;font-family:"PingFang SC","Noto Sans CJK SC",Arial,sans-serif;color:var(--ink)}
+    main{width:min(1440px,100%);margin:auto}.board{position:relative;min-height:810px;padding:72px;overflow:hidden;background:var(--paper);margin-bottom:4px}.cover{height:auto;min-height:0;padding:0;background:var(--cream)}
+    .cover img{display:block;width:100%;aspect-ratio:16/9;object-fit:contain}.cover .index{position:absolute;top:34px;left:50%;transform:translateX(-50%);color:var(--ink)}
+    .index{font-size:12px;letter-spacing:.16em;font-weight:700;text-transform:uppercase;color:var(--muted)}h1,h2,h3,p{margin:0}h2{font-size:54px;line-height:1.08;letter-spacing:-.045em}h3{font-size:28px;line-height:1.2}.lead{font-size:23px;line-height:1.65}.body{font-size:15px;line-height:1.9;color:var(--muted)}
+    .head{display:grid;grid-template-columns:480px 1fr;gap:98px;padding-bottom:44px;border-bottom:1px solid currentColor}.head .index{grid-column:1/-1}.head h2{grid-column:1}.head .body{grid-column:2}.context{display:grid;grid-template-columns:480px 1fr;gap:98px}.context .index{grid-column:1/-1}.context .left h2{margin-top:46px}.context .lead{margin-top:46px}.context .body{margin-top:28px}.meta{margin-top:38px;padding-top:28px;border-top:1px solid var(--ink);display:grid;grid-template-columns:1fr 1fr;gap:28px 36px}.meta small{display:block;color:var(--muted);font-size:11px;letter-spacing:.08em}.meta b{display:block;margin-top:8px;font-size:18px}
+    .journey-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:54px}.card{min-height:270px;padding:22px;background:var(--cream);border:1px solid var(--ink)}.card:nth-child(3){background:var(--copper)}.card small{letter-spacing:.1em}.card h3{margin-top:42px}.card p{margin-top:24px;padding-top:20px;border-top:1px solid var(--ink);font-size:14px;line-height:1.65}.challenge{display:flex;justify-content:space-between;align-items:center;margin-top:44px;font-size:16px;font-weight:700}.tag{display:inline-block;padding:7px 10px;border:1px solid currentColor;background:#fff;font-size:10px;letter-spacing:.1em}
+    .concept{background:var(--copper);color:#fff;display:grid;grid-template-columns:1fr 1.08fr;gap:36px}.concept .index{color:var(--cream)}.concept h2{margin-top:88px;font-size:68px}.concept .body{margin-top:74px;max-width:530px;color:#fff}.concept img{width:100%;height:710px;object-fit:cover}.concept .tag{margin-top:40px;background:var(--black)}
+    .system-head,.touch-head{display:flex;justify-content:space-between;gap:70px;align-items:end}.system-head .body,.touch-head .body{max-width:510px}.system-grid{display:grid;grid-template-columns:1.45fr .8fr;gap:48px;margin-top:42px}.system-grid>img{width:100%;height:600px;object-fit:contain}.system-cards{display:grid;gap:18px}.system-cards .card{min-height:0;height:176px}.system-cards .card:nth-child(1){background:var(--gold)}.system-cards .card:nth-child(2){background:var(--copper)}.system-cards .card:nth-child(3){background:var(--blue)}.system-cards h3{margin-top:8px;font-size:20px}.system-cards p{margin-top:12px;padding-top:0;border:0;font-size:13px}
+    .engagement{background:#dae3f2}.hero-img{display:block;width:100%;height:480px;object-fit:cover;margin-top:48px}.rules{background:#fff;padding:48px}.rules .system-head h2{font-size:42px}.rules img{display:block;width:100%;height:680px;object-fit:contain;margin-top:28px}
+    .spatial-grid{display:grid;grid-template-columns:420px 1fr;gap:42px;margin-top:48px}.spatial-grid img{width:100%;height:470px}.spatial-grid img:first-child{object-fit:contain}.spatial-grid img:last-child{object-fit:cover}.caption{margin-top:12px;font-size:12px;color:var(--muted)}
+    .touch{background:var(--black);color:#fff}.touch .index{color:var(--cream)}.touch .body,.touch .caption{color:#c4bbb0}.event-row{display:grid;grid-template-columns:1fr 1.08fr;gap:32px;margin-top:36px}.event-row img{width:100%;height:315px;object-fit:cover}.digital-row{display:grid;grid-template-columns:390px 1fr;gap:32px;margin-top:38px}.digital-row img{width:100%;height:300px}.digital-row img:first-child{object-fit:contain}.digital-row img:last-child{object-fit:cover}
+    .guide{background:var(--cream);display:grid;grid-template-columns:1.05fr .85fr;gap:100px}.guide h2{margin-top:42px}.guide .body{margin-top:70px;color:var(--ink)}.specs{margin-top:52px}.spec-row{display:grid;grid-template-columns:200px 1fr;padding:17px 0;border-top:1px solid var(--copper)}.spec-row span{font-size:12px;color:var(--muted)}.spec-row b{font-size:18px}
+    @media(max-width:800px){.board{padding:32px;min-height:auto}.context,.head,.concept,.system-grid,.spatial-grid,.guide{grid-template-columns:1fr}.journey-grid{grid-template-columns:1fr 1fr}.event-row,.digital-row{grid-template-columns:1fr}.cover .index{top:16px;font-size:8px}.concept img{height:auto}.rules{padding:24px}}
+  </style>
+</head>
+<body>
+<main>
+  <section class="board cover">
+    <img src="file:///Users/ttao/Downloads/作品集/有请讲书人2025横版主kv.png" alt="有请讲书人主视觉">
+    <div class="index">PROJECT 07 / EVENT VISUAL</div>
+  </section>
+
+  <section class="board context">
+    <div class="index">01 / CONTEXT</div>
+    <div class="left"><h2>阅读不只发生在书页里，也发生在一次被听见的讲述中。</h2></div>
+    <div>
+      <p class="lead">“有请讲书人”是第 26 届深圳读书月中的阅读分享活动，以讲述与公共表达连接一本书、一个人的理解和更多听众。</p>
+      <p class="body">视觉需要覆盖活动传播、评选沟通、总决赛、现场空间与线上邀请。设计既要保持公共文化活动的正式感，也要让参与者感到舞台是可接近、可加入的。</p>
+      <div class="meta"><div><small>项目类型</small><b>读书月活动视觉</b></div><div><small>项目时间</small><b>2025</b></div><div><small>传播范围</small><b>线上传播 / 现场空间</b></div><div><small>个人职责</small><b>主要负责主视觉、视觉规范与物料延展</b></div></div>
+    </div>
+  </section>
+
+  <section class="board">
+    <div class="head"><div class="index">02 / JOURNEY &amp; CHALLENGE</div><h2>把一次讲述，组织成完整的活动体验。</h2><p class="body">从参与者第一次看到活动，到走进现场并留下分享记忆，视觉系统需要在不同阶段提供一致识别，同时改变信息密度和表达语气。</p></div>
+    <div class="journey-grid"><article class="card"><small>01</small><h3>报名传播</h3><p>建立兴趣<br>明确参与入口</p></article><article class="card"><small>02</small><h3>评选沟通</h3><p>组织信息<br>维持活动识别</p></article><article class="card"><small>03</small><h3>总决赛</h3><p>强化舞台感<br>突出时间地点</p></article><article class="card"><small>04</small><h3>分享与留念</h3><p>连接现场<br>延续活动记忆</p></article></div>
+    <div class="challenge"><span>设计挑战：建立活动识别 / 平衡正式感与亲和力 / 适配横竖版、空间和数字触点</span><span class="tag">ONE IDENTITY / MULTIPLE MOMENTS</span></div>
+  </section>
+
+  <section class="board concept">
+    <div><div class="index">03 / INSIGHT &amp; CONCEPT</div><h2>让阅读从个人理解走向公共表达。</h2><p class="body">层叠结构从书页逐步转译为台阶、建筑与舞台：每一次阅读理解，都是向表达靠近的一层。麦克风确定“讲述”的动作，连续流线则像声音与路径，把分散触点连接成同一场活动。</p><span class="tag">READ → UNDERSTAND → SPEAK → SHARE</span></div>
+    <img src="file:///Users/ttao/Documents/Codex/2026-07-11/new-chat/outputs/portfolio-v4-source-shwung/assets/portfolio-pages/39.jpg" alt="视觉系统局部">
+  </section>
+
+  <section class="board">
+    <div class="system-head"><div><div class="index">04 / VISUAL SYSTEM</div><h2>一套识别语言，承载阅读、进步与讲述。</h2></div><p class="body">暖金与橙红建立公共文化活动的温度，蓝色为参与传播提供清晰对比。字体、层叠几何和流线共同维持正式识别。</p></div>
+    <div class="system-grid"><img src="file:///Users/ttao/Documents/Codex/2026-07-11/new-chat/outputs/portfolio-v4-source-shwung/assets/portfolio-pages/39.jpg" alt="有请讲书人视觉规范"><div class="system-cards"><article class="card"><small>01</small><h3>上升的书页</h3><p>层叠几何同时像书页、台阶和舞台，形成由阅读走向表达的路径。</p></article><article class="card"><small>02</small><h3>持续的讲述</h3><p>流动线条连接画面边界，转化声音、时间与活动动线。</p></article><article class="card"><small>03</small><h3>温暖的公共色彩</h3><p>#EED795 / #F1CA5F / #D58346；#6887BE 负责传播对比。</p></article></div></div>
+  </section>
+
+  <section class="board engagement">
+    <div class="head"><div class="index">05 / ENGAGEMENT VISUAL</div><h2>把“走上舞台”，变成一眼可感知的参与动作。</h2><p class="body">参与传播使用蓝黄三维阶梯、漂浮书本与麦克风。阶梯让“进步”变得具体，也把讲述舞台塑造成可以一步步靠近的空间。它与金色官方识别承担不同传播层级。</p></div>
+    <img class="hero-img" src="file:///Users/ttao/Documents/Codex/2026-07-11/new-chat/outputs/portfolio-v4-source-shwung/assets/portfolio-pages/38.jpg" alt="参与传播视觉">
+  </section>
+
+  <section class="board rules">
+    <div class="system-head"><div><div class="index">06 / LAYOUT RULES</div><h2>固定识别层级，适配横版、竖版与不同信息密度。</h2></div><p class="body">Logo 区、标题区、主图形区与信息区保持稳定关系；尺寸变化时重新组织，而不是简单等比缩放。</p></div>
+    <img src="file:///Users/ttao/Documents/Codex/2026-07-11/new-chat/outputs/portfolio-v4-source-shwung/assets/portfolio-pages/40.jpg" alt="版式规范">
+  </section>
+
+  <section class="board">
+    <div class="head"><div class="index">07 / SPATIAL APPLICATION</div><h2>从远距离识别，到近距离行动指引。</h2><p class="body">灯箱海报承担活动识别与时间信息，立式导视承接签到和现场行动。相同的金色层叠结构，在不同观看距离中调整主次与裁切。</p></div>
+    <div class="spatial-grid"><div><img src="file:///Users/ttao/Documents/Codex/2026-07-11/new-chat/outputs/portfolio-v4-source-shwung/assets/portfolio-pages/41.jpg" alt="空间物料完整图"><p class="caption">完整物料关系 / 灯箱、导视与签到触点</p></div><div><img src="file:///Users/ttao/Documents/Codex/2026-07-11/new-chat/outputs/portfolio-v4-source-shwung/assets/portfolio-pages/41.jpg" alt="空间物料局部"><p class="caption">局部放大 / 在空间距离中保留标题与日期识别</p></div></div>
+  </section>
+
+  <section class="board touch">
+    <div class="touch-head"><div><div class="index">08 / EVENT &amp; DIGITAL TOUCHPOINTS</div><h2>视觉从现场空间，延续到身份与线上邀约。</h2></div><p class="body">舞台分享、集体留影、工作证和移动端邀请共同构成活动记忆。统一的色彩、标题结构和线性图形让触点保持连续。</p></div>
+    <div class="event-row"><img src="file:///Users/ttao/Documents/Codex/2026-07-11/new-chat/outputs/portfolio-v4-source-shwung/assets/portfolio-pages/42.jpg" alt="活动现场"><img src="file:///Users/ttao/Documents/Codex/2026-07-11/new-chat/outputs/portfolio-v4-source-shwung/assets/portfolio-pages/42.jpg" alt="活动现场局部"></div><p class="caption">现场 / 分享、舞台与共同留影</p>
+    <div class="digital-row"><img src="file:///Users/ttao/Documents/Codex/2026-07-11/new-chat/outputs/portfolio-v4-source-shwung/assets/portfolio-pages/43.jpg" alt="证件与移动邀请"><img src="file:///Users/ttao/Documents/Codex/2026-07-11/new-chat/outputs/portfolio-v4-source-shwung/assets/portfolio-pages/43.jpg" alt="数字物料局部"></div><p class="caption">数字与身份 / 工作证、移动端邀请</p>
+  </section>
+
+  <section class="board guide">
+    <div><div class="index">09 / SUMMARY &amp; AI BUILD GUIDE</div><h2>把阅读、表达与公共分享，组织成一段连续体验。</h2><p class="body">项目以层叠书页和流动线条建立官方识别，再用三维阶梯强化参与传播。视觉从横竖版规范延展至空间导视、活动现场、证件与移动邀请。主要负责主视觉、视觉规范与物料延展。</p></div>
+    <div class="specs"><div class="spec-row"><span>画板基准</span><b>1440 px / RGB</b></div><div class="spec-row"><span>文字 / 图片边距</span><b>72 px / 48 px</b></div><div class="spec-row"><span>主标题</span><b>82–104 px</b></div><div class="spec-row"><span>章节标题</span><b>48–58 px</b></div><div class="spec-row"><span>正文 / 图注</span><b>15 px / 12–13 px</b></div><div class="spec-row"><span>常用间距</span><b>24 / 48 / 72 / 120 px</b></div></div>
+  </section>
+</main>
+</body>
+</html>

@@ -442,7 +442,7 @@
         file.writeln("canva_watermark_used=0");
         file.writeln("color_mode=RGB");
         file.writeln("source_pages=01,04,05,07,09,10,11,14,15,16,17");
-        file.writeln("output_ai_name=大神龛-数字榫卯交互装置-SelectedWorks独立案例.ai");
+        file.writeln("output_ai_name=digital-mortise-interactive-selected-works.ai");
         file.close();
     }
 

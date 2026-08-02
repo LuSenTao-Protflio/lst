@@ -101,7 +101,7 @@ var boards = [
 
 ```bash
 sed '1d' scripts/illustrator/build-smallrig-focus-selected-works.jsx | node --check
-rg -n 'placeImage[^\n]+cover' scripts/illustrator/build-smallrig-focus-selected-works.jsx
+rg -n 'Math\.max|mode === "cover"|fitCover' scripts/illustrator/build-smallrig-focus-selected-works.jsx
 ```
 
 Expected: 语法通过，第二条命令无输出。

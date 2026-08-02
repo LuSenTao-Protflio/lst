@@ -377,7 +377,7 @@
         file.writeln("fit_mode=contain_only");
         file.writeln("paid_wave_asset_used=0");
         file.writeln("document_color_space=RGB");
-        file.writeln("output_ai=" + OUTPUT_AI);
+        file.writeln("output_ai_name=SmallRig-Focus-SelectedWorks.ai");
         file.close();
     }
 

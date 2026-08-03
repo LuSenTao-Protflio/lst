@@ -53,7 +53,7 @@ test("phone pager and shared footer collapse without horizontal overflow", async
 
   assert.match(phone, /\.project-pager\{[^}]*grid-template-columns:1fr[^}]*padding-bottom:4rem/);
   assert.match(phone, /\.project-pager-next\{[^}]*align-items:flex-start[^}]*text-align:left/);
-  assert.match(phone, /\.footer\{[^}]*padding:6rem var\(--pad\) \.75rem/);
+  assert.match(phone, /\.footer\{[^}]*padding:1\.5rem var\(--pad\) \.75rem/);
   assert.match(phone, /\.footer-contact-link\{[^}]*overflow-wrap:anywhere/);
 });
 

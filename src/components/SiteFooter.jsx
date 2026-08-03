@@ -54,12 +54,25 @@ export default function SiteFooter({ editorial = false, onActiveChange }) {
 
   return (
     <footer className="footer" id="contact">
-      <div ref={observerRef} className="footer-observer">
-        <motion.div
-          className="footer-info"
+      <div className="footer-observer">
+        <motion.p
+          className="footer-wordmark"
+          aria-label="LUSENTAO"
           {...reveal}
-          viewport={{ amount: 0.35 }}
-          transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ amount: 0.2 }}
+          transition={{
+            duration: 0.9,
+            delay: reduceMotion ? 0 : 0.08,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >LUSENTAO</motion.p>
+
+        <div ref={observerRef} className="footer-info-stage">
+          <motion.div
+            className="footer-info"
+            {...reveal}
+            viewport={{ amount: 0.35 }}
+            transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="footer-contact">
             <h2 className="footer-heading">{t("footer.col1Heading")}</h2>
@@ -74,19 +87,8 @@ export default function SiteFooter({ editorial = false, onActiveChange }) {
             <h2 className="footer-heading">{t("footer.col2Heading")}</h2>
             <p className="footer-about">{t("footer.col2Desc")}</p>
           </div>
-        </motion.div>
-
-        <motion.p
-          className="footer-wordmark"
-          aria-label="LUSENTAO"
-          {...reveal}
-          viewport={{ amount: 0.2 }}
-          transition={{
-            duration: 0.9,
-            delay: reduceMotion ? 0 : 0.08,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-        >LUSENTAO</motion.p>
+          </motion.div>
+        </div>
       </div>
     </footer>
   );

@@ -55,3 +55,17 @@ test("only Home opts into the long editorial footer", async () => {
   assert.match(projectChrome, /<SiteFooter \/>/);
   assert.doesNotMatch(projectChrome, /<SiteFooter editorial/);
 });
+
+test("the wordmark leads directly into a later-revealed information stage", async () => {
+  const footer = await read("../src/components/SiteFooter.jsx");
+  const css = await read("../src/styles.css");
+
+  assert.ok(
+    footer.indexOf('className="footer-wordmark"') < footer.indexOf('className="footer-info-stage"'),
+    "wordmark should render before the contact and About stage",
+  );
+  assert.match(footer, /ref=\{observerRef\} className="footer-info-stage"/);
+  assert.match(css, /\.footer-wordmark\{[^}]*width:min\(50%,620px\)[^}]*font-size:clamp\(3rem,7\.2vw,6\.4rem\)/s);
+  assert.match(css, /\.footer-info-stage\{[^}]*margin-top:clamp\(10rem,28vh,18rem\)/s);
+  assert.match(css, /\.work\{[^}]*padding:0 var\(--pad\) 0/);
+});

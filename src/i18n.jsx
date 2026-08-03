@@ -161,9 +161,10 @@ const translations = {
     // Footer
     footer: {
       col1Heading: "求职联系",
+      emailLabel: "邮箱",
       col1Email: "sentaolu371@gmail.com",
-      col1Phone: "电话 / 微信同号：15875591020",
-      col2Heading: "关于我",
+      phoneLabel: "电话 / 微信",
+      col1Phone: "15875591020",
       col2Desc: "我是一名视觉传达设计专业应届毕业生，现居深圳。在校期间积累了扎实的品牌视觉、排版与UI设计功底，并在帆书、紫鸟科技、麦高创想家等企业的实习中，将设计能力落地为真实的商业项目。我擅长用视觉语言构建品牌叙事，对AIGC辅助设计有持续探索。期待加入一个重视创意与执行力的团队，用设计解决问题。",
     },
   },
@@ -320,9 +321,10 @@ const translations = {
 
     footer: {
       col1Heading: "Career Contact",
+      emailLabel: "Email",
       col1Email: "sentaolu371@gmail.com",
-      col1Phone: "Phone / WeChat: 15875591020",
-      col2Heading: "About Me",
+      phoneLabel: "Phone / WeChat",
+      col1Phone: "15875591020",
       col2Desc: "I am a recent graduate in Visual Communication Design, currently based in Shenzhen. During my studies, I built a solid foundation in brand identity, typography, and UI design. Through internships at Fanshu, Ziniao Tech, and Maigao Imagination, I translated design thinking into real commercial outcomes. I specialize in using visual language to construct brand narratives and continuously explore AIGC-assisted design. I look forward to joining a team that values both creativity and execution—where design solves real problems.",
     },
   },

@@ -10,6 +10,7 @@ test("SiteFooter exposes the editorial outro structure and semantic contact link
   assert.match(footer, /function SiteFooter\(\{ editorial = false, onActiveChange \}\)/);
   assert.match(footer, /id="contact"/);
   assert.match(footer, /className="footer-observer"/);
+  assert.match(footer, /className="footer-reveal-spacer"/);
   assert.match(footer, /className="footer-info"/);
   assert.match(footer, /className="footer-wordmark"/);
   assert.match(footer, /href="mailto:sentaolu371@gmail\.com"/);
@@ -56,16 +57,19 @@ test("only Home opts into the long editorial footer", async () => {
   assert.doesNotMatch(projectChrome, /<SiteFooter editorial/);
 });
 
-test("the wordmark stays at the bottom while a later information stage reveals above it", async () => {
+test("the contact stage is revealed beneath the final project before the closing wordmark", async () => {
   const footer = await read("../src/components/SiteFooter.jsx");
   const css = await read("../src/styles.css");
 
   assert.ok(
-    footer.indexOf('className="footer-wordmark"') < footer.indexOf('className="footer-info-stage"'),
-    "wordmark should render before the contact and About stage",
+    footer.indexOf('className="footer-info-stage"') < footer.indexOf('className="footer-wordmark"'),
+    "contact and About stage should render before the closing wordmark",
   );
-  assert.match(footer, /ref=\{observerRef\} className="footer-info-stage"/);
-  assert.match(css, /\.footer-wordmark\{[^}]*position:sticky[^}]*top:calc\(100svh - clamp\(6\.5rem,10vw,9rem\)\)[^}]*width:min\(50%,620px\)[^}]*font-size:clamp\(3rem,7\.2vw,6\.4rem\)/s);
-  assert.match(css, /\.footer-info-stage\{[^}]*z-index:2[^}]*margin-top:clamp\(26rem,72svh,44rem\)[^}]*padding-bottom:clamp\(14rem,30svh,24rem\)/s);
+  assert.match(footer, /ref=\{observerRef\} className="footer-reveal-spacer"/);
+  assert.match(css, /\.project:last-child\{[^}]*z-index:3[^}]*isolation:isolate/);
+  assert.match(css, /\.project:last-child::before\{[^}]*left:50%[^}]*width:100vw[^}]*transform:translateX\(-50%\)[^}]*background:var\(--deep\)/);
+  assert.match(css, /\.footer\{[^}]*position:fixed[^}]*height:100svh[^}]*visibility:hidden/s);
+  assert.match(css, /\.footer-reveal-spacer\{[^}]*height:100svh/s);
+  assert.match(css, /\.footer-info\{[^}]*grid-template-columns:minmax\(0,1fr\) minmax\(0,1fr\)/s);
   assert.match(css, /\.work\{[^}]*padding:0 var\(--pad\) 0/);
 });

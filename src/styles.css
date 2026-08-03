@@ -216,9 +216,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .dir-row-tags span{font-size:.58rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--fg);border:1px solid var(--line);padding:.15rem .5rem;border-radius:99px;white-space:nowrap}
 
 /* ── Editorial Outro ── */
-.footer{position:relative;min-height:clamp(46rem,112svh,64rem);padding:clamp(1.25rem,3vw,2.5rem) var(--pad) clamp(3rem,7vh,6rem);border-top:0;background:var(--deep);color:var(--fg);overflow:hidden}
-.footer-observer{width:min(100%,var(--max-w));margin:0 auto}
-.footer-info-stage{margin-top:clamp(10rem,28vh,18rem);padding-bottom:clamp(3rem,8vh,7rem)}
+.footer{position:relative;min-height:clamp(62rem,165svh,92rem);padding:clamp(1.25rem,3vw,2.5rem) var(--pad) clamp(2rem,4vh,3rem);border-top:0;background:var(--deep);color:var(--fg);overflow:clip}
+.footer-observer{position:relative;width:min(100%,var(--max-w));min-height:inherit;margin:0 auto}
+.footer-info-stage{position:relative;z-index:2;margin-top:clamp(26rem,72svh,44rem);padding-bottom:clamp(14rem,30svh,24rem)}
 .footer-info{display:grid;grid-template-columns:minmax(17rem,.8fr) minmax(26rem,1.2fr);gap:clamp(4rem,10vw,10rem);align-items:start}
 .footer-contact,.footer-about-col{min-width:0}
 .footer-heading{margin-bottom:1.2rem;color:var(--accent);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
@@ -229,7 +229,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .footer-contact-link:hover::after,.footer-contact-link:focus-visible::after{transform:scaleX(1)}
 .footer-contact-link:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
 .footer-about{max-width:50ch;color:rgba(255,253,245,.78);font-size:clamp(1rem,1.45vw,1.3rem);line-height:1.75;text-wrap:pretty}
-.footer-wordmark{width:min(50%,620px);margin:0;color:var(--accent);font-family:"Climate Crisis",var(--font);font-size:clamp(3rem,7.2vw,6.4rem);font-weight:800;line-height:.78;letter-spacing:-.075em;white-space:nowrap}
+.footer-wordmark{position:sticky;z-index:1;top:calc(100svh - clamp(6.5rem,10vw,9rem));width:min(50%,620px);margin:0;color:var(--accent);font-family:"Climate Crisis",var(--font);font-size:clamp(3rem,7.2vw,6.4rem);font-weight:800;line-height:.78;letter-spacing:-.075em;white-space:nowrap}
 .footer-compact{padding:5rem var(--pad);border-top:1px solid var(--line);background:var(--orange);color:var(--fg)}
 .footer-compact-inner{width:min(100%,var(--max-w));margin:0 auto;display:grid;grid-template-columns:minmax(17rem,.8fr) minmax(26rem,1.2fr);gap:clamp(4rem,9vw,9rem);align-items:center}
 .footer-compact-link{display:table;position:relative;color:var(--fg);font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;line-height:1.15;letter-spacing:-.03em}
@@ -487,12 +487,12 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   .hero-meta span:nth-child(2),.hero-meta span:nth-child(3){text-align:left}
   .detail-grid-item{flex:0 0 calc((100% - .8rem) / 2)}
   .narrative-grid{grid-template-columns:1fr 1fr}
-  .footer{min-height:auto;padding-top:1.5rem;padding-bottom:.75rem}
-  .footer-info-stage{margin-top:clamp(8rem,30vw,12rem);padding-bottom:4rem}
+  .footer{min-height:145svh;padding-top:1.5rem;padding-bottom:1rem}
+  .footer-info-stage{margin-top:62svh;padding-bottom:clamp(10rem,25svh,14rem)}
   .footer-info{grid-template-columns:1fr;gap:3.5rem}
   .footer-contact-link{font-size:clamp(1.2rem,6vw,1.85rem)}
   .footer-about{font-size:.98rem;line-height:1.75}
-  .footer-wordmark{width:min(72%,24rem);font-size:clamp(2.6rem,11vw,5.2rem);line-height:.8;letter-spacing:-.07em}
+  .footer-wordmark{top:calc(100svh - clamp(5.5rem,18vw,7rem));width:min(72%,24rem);font-size:clamp(2.6rem,11vw,5.2rem);line-height:.8;letter-spacing:-.07em}
   .footer-compact-inner{grid-template-columns:1fr;gap:2.5rem}
   .project-taskbar{grid-template-columns:minmax(70px,1fr) minmax(0,1.5fr) minmax(56px,1fr);gap:.45rem}
   .project-taskbar-back-long,.project-taskbar-order-long{display:none}

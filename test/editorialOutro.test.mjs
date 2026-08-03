@@ -56,7 +56,7 @@ test("only Home opts into the long editorial footer", async () => {
   assert.doesNotMatch(projectChrome, /<SiteFooter editorial/);
 });
 
-test("the wordmark leads directly into a later-revealed information stage", async () => {
+test("the wordmark stays at the bottom while a later information stage reveals above it", async () => {
   const footer = await read("../src/components/SiteFooter.jsx");
   const css = await read("../src/styles.css");
 
@@ -65,7 +65,7 @@ test("the wordmark leads directly into a later-revealed information stage", asyn
     "wordmark should render before the contact and About stage",
   );
   assert.match(footer, /ref=\{observerRef\} className="footer-info-stage"/);
-  assert.match(css, /\.footer-wordmark\{[^}]*width:min\(50%,620px\)[^}]*font-size:clamp\(3rem,7\.2vw,6\.4rem\)/s);
-  assert.match(css, /\.footer-info-stage\{[^}]*margin-top:clamp\(10rem,28vh,18rem\)/s);
+  assert.match(css, /\.footer-wordmark\{[^}]*position:sticky[^}]*top:calc\(100svh - clamp\(6\.5rem,10vw,9rem\)\)[^}]*width:min\(50%,620px\)[^}]*font-size:clamp\(3rem,7\.2vw,6\.4rem\)/s);
+  assert.match(css, /\.footer-info-stage\{[^}]*z-index:2[^}]*margin-top:clamp\(26rem,72svh,44rem\)[^}]*padding-bottom:clamp\(14rem,30svh,24rem\)/s);
   assert.match(css, /\.work\{[^}]*padding:0 var\(--pad\) 0/);
 });

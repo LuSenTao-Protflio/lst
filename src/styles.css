@@ -82,7 +82,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .cover-project-list{position:relative;z-index:2;width:min(100%,780px);margin:0 auto;display:flex;flex-direction:column;align-items:stretch;gap:clamp(.28rem,.8vh,.62rem);border:0}
 .cover-project-row-wrap{position:relative;width:100%;border:0}
 .cover-project-row{--proximity:0;display:grid;grid-template-columns:2.4rem 3.8rem minmax(0,1fr);align-items:center;justify-content:start;min-height:clamp(2.75rem,5.1vh,4rem);padding:.08rem 0;color:rgba(255,253,245,.38);transform:translateX(calc(var(--proximity) * 24px)) scale(calc(1 + var(--proximity) * .075));transform-origin:left center;opacity:calc(.56 + var(--proximity) * .44);will-change:transform,color,opacity}
-.cover-project-index{font-size:.58rem;font-weight:750;letter-spacing:.12em;color:rgba(255,253,245,.38);font-variant-numeric:tabular-nums}
+.cover-project-index{font-family:"Climate Crisis",var(--font);font-size:.58rem;font-weight:400;letter-spacing:.08em;color:rgba(255,253,245,.38);font-variant-numeric:tabular-nums}
 .cover-project-tick{display:block;width:calc(1.3rem + var(--proximity) * 2rem);height:1px;background:var(--accent);opacity:calc(.22 + var(--proximity) * .78);transform-origin:left center}
 .cover-project-title{display:block;font-size:clamp(1.55rem,3vw,2.65rem);font-weight:800;line-height:1.02;letter-spacing:-.045em;text-align:left;text-wrap:balance}
 .cover-project-row.is-active{color:#fffdf5}
@@ -134,7 +134,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
 .project-summary{max-width:var(--max-w);min-height:250px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,340px);align-items:center;gap:clamp(2rem,6vw,6rem)}
 .project-body{max-width:650px;margin:0}
-.project-num{font-size:clamp(3rem,6vw,5rem);font-weight:800;color:var(--line);line-height:1;margin-bottom:.4rem;user-select:none}
+.project-num{font-family:"Climate Crisis",var(--font);font-size:clamp(3rem,6vw,5rem);font-weight:400;letter-spacing:-.08em;color:var(--line);line-height:1;margin-bottom:.4rem;user-select:none}
 .project-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.4rem}
 .project-tags span{position:relative;isolation:isolate;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg);background:transparent;border:0;padding:.28rem .62rem;border-radius:0;text-shadow:0 1px 8px rgba(0,0,0,.5)}
 .project-tags span::before{content:"";position:absolute;z-index:-1;left:-.08rem;right:-.08rem;top:calc(100% - .2rem);bottom:.02rem;background:var(--accent);clip-path:polygon(1% 16%,97% 2%,100% 78%,3% 100%);transform:rotate(-1deg);box-shadow:none}
@@ -207,7 +207,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .dir-list{max-width:var(--max-w);margin:0 auto}
 .dir-row{position:relative;display:grid;grid-template-columns:60px 1fr auto;gap:2rem;align-items:center;padding:1.5rem 0;border-bottom:1px solid var(--line);transition:color .35s,background .35s,box-shadow .35s;text-decoration:none;color:inherit;cursor:pointer;clip-path:inset(0 -100vmax)}
 .dir-row:first-child{border-top:1px solid var(--line)}
-.dir-row-num{font-size:2rem;font-weight:800;color:var(--line);line-height:1;transition:color .3s}
+.dir-row:hover{opacity:1;color:var(--lime);background:var(--deep);box-shadow:0 0 0 100vmax var(--deep)}
+.dir-row-num{font-family:"Climate Crisis",var(--font);font-size:2rem;font-weight:400;letter-spacing:-.08em;color:var(--line);line-height:1;transition:color .3s}
+.dir-row:hover .dir-row-num{color:var(--accent)}
 .dir-row-body{display:flex;flex-direction:column;gap:.15rem;min-width:0}
 .dir-row-title{display:inline-block;width:max-content;max-width:100%;font-size:1.15rem;font-weight:700;line-height:1.35;letter-spacing:-.01em;transform-origin:left center;transition:transform .32s cubic-bezier(.22,1,.36,1);will-change:transform}
 .dir-row:focus-visible .dir-row-title{transform:translateX(.18em) scale(1.12)}
@@ -253,6 +255,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .detail-header{max-width:var(--max-w);margin:3rem auto 0;padding:0 var(--pad)}
 .detail-num{font-size:clamp(3rem,6vw,5rem);font-weight:800;color:var(--line);line-height:1;display:block;margin-bottom:.4rem;user-select:none}
 .project-label{display:block;margin-bottom:1.35rem;font-size:clamp(1rem,1.35vw,1.125rem);font-weight:650;line-height:1.2;letter-spacing:.075em;text-transform:uppercase;color:var(--fg)}
+.project-label-num{font-family:"Climate Crisis",var(--font);font-weight:400;letter-spacing:-.06em}
 .project-label i{padding:0 .2em;font-style:normal;color:var(--muted)}
 .detail-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem}
 .detail-tags span{position:relative;isolation:isolate;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg);background:transparent;border:0;padding:.28rem .62rem;border-radius:0;text-shadow:0 1px 8px rgba(0,0,0,.5)}

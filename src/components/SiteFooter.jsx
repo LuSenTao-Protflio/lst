@@ -2,14 +2,14 @@ import { useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "../i18n";
 
-export default function SiteFooter({ onActiveChange }) {
+export default function SiteFooter({ editorial = false, onActiveChange }) {
   const { t } = useLanguage();
   const observerRef = useRef(null);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const node = observerRef.current;
-    if (!node || !onActiveChange) return undefined;
+    if (!editorial || !node || !onActiveChange) return undefined;
 
     const observer = new IntersectionObserver(
       ([entry]) => onActiveChange?.(entry.isIntersecting),
@@ -21,7 +21,7 @@ export default function SiteFooter({ onActiveChange }) {
       observer.disconnect();
       onActiveChange?.(false);
     };
-  }, [onActiveChange]);
+  }, [editorial, onActiveChange]);
 
   const reveal = reduceMotion
     ? { initial: false }
@@ -29,6 +29,28 @@ export default function SiteFooter({ onActiveChange }) {
         initial: { opacity: 0, y: 36 },
         whileInView: { opacity: 1, y: 0 },
       };
+
+  if (!editorial) {
+    return (
+      <footer className="footer-compact" id="contact">
+        <div className="footer-compact-inner">
+          <div>
+            <h2 className="footer-heading">{t("footer.col1Heading")}</h2>
+            <a href="mailto:sentaolu371@gmail.com" className="footer-compact-link">
+              {t("footer.col1Email")}
+            </a>
+            <a href="tel:15875591020" className="footer-compact-link footer-compact-phone">
+              15875591020
+            </a>
+          </div>
+          <div>
+            <h2 className="footer-heading">{t("footer.col2Heading")}</h2>
+            <p className="footer-about">{t("footer.col2Desc")}</p>
+          </div>
+        </div>
+      </footer>
+    );
+  }
 
   return (
     <footer className="footer" id="contact">

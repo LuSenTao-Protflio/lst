@@ -228,6 +228,13 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .footer-contact-link:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
 .footer-about{max-width:50ch;color:rgba(255,253,245,.78);font-size:clamp(1rem,1.45vw,1.3rem);line-height:1.75;text-wrap:pretty}
 .footer-wordmark{align-self:stretch;margin:0 -.04em;color:var(--accent);font-family:"Climate Crisis",var(--font);font-size:clamp(4rem,15.8vw,14rem);font-weight:800;line-height:.7;letter-spacing:-.075em;white-space:nowrap}
+.footer-compact{padding:5rem var(--pad);border-top:1px solid var(--line);background:var(--orange);color:var(--fg)}
+.footer-compact-inner{width:min(100%,var(--max-w));margin:0 auto;display:grid;grid-template-columns:minmax(17rem,.8fr) minmax(26rem,1.2fr);gap:clamp(4rem,9vw,9rem);align-items:center}
+.footer-compact-link{display:table;position:relative;color:var(--fg);font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;line-height:1.15;letter-spacing:-.03em}
+.footer-compact-link::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--accent);transition:width .3s ease}
+.footer-compact-link:hover::after,.footer-compact-link:focus-visible::after{width:100%}
+.footer-compact-link:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.footer-compact-phone{margin-top:.7rem;font-size:.8rem;letter-spacing:.08em}
 
 /* ── Project Detail ── */
 .detail{padding-bottom:4rem}
@@ -484,6 +491,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   .footer-contact-link{font-size:clamp(1.2rem,6vw,1.85rem)}
   .footer-about{font-size:.98rem;line-height:1.75}
   .footer-wordmark{font-size:clamp(3rem,17vw,6.2rem);line-height:.78;letter-spacing:-.07em}
+  .footer-compact-inner{grid-template-columns:1fr;gap:2.5rem}
   .project-taskbar{grid-template-columns:minmax(70px,1fr) minmax(0,1.5fr) minmax(56px,1fr);gap:.45rem}
   .project-taskbar-back-long,.project-taskbar-order-long{display:none}
   .project-taskbar-back-short,.project-taskbar-order-short{display:inline}

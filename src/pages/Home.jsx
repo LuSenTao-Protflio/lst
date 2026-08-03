@@ -255,7 +255,7 @@ export default function Home() {
         })}
       </section>
 
-      <SiteFooter onActiveChange={setOutroActive} />
+      <SiteFooter editorial onActiveChange={setOutroActive} />
     </div>
   );
 }

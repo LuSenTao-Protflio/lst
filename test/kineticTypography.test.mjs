@@ -50,10 +50,11 @@ test("TextPressure uses the registered local variable font family", async () => 
   assert.match(source, /fontFamily: "Roboto Flex Variable"/);
 });
 
-test("phone contact uses the footer heading hierarchy", async () => {
+test("footer contact links share the editorial contact hierarchy", async () => {
   const styles = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
-  const rule = styles.match(/\.footer-phone\{[^}]*\}/)?.[0] ?? "";
+  const rule = styles.match(/\.footer-contact-link\{[^}]*\}/)?.[0] ?? "";
 
-  assert.match(rule, /font-size:\.68rem/);
-  assert.match(rule, /color:var\(--accent\)/);
+  assert.match(rule, /font-size:clamp\(1\.35rem,2\.65vw,2\.6rem\)/);
+  assert.match(rule, /color:var\(--fg\)/);
+  assert.match(rule, /min-height:44px/);
 });

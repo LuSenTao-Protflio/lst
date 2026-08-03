@@ -53,9 +53,8 @@ test("phone pager and shared footer collapse without horizontal overflow", async
 
   assert.match(phone, /\.project-pager\{[^}]*grid-template-columns:1fr[^}]*padding-bottom:4rem/);
   assert.match(phone, /\.project-pager-next\{[^}]*align-items:flex-start[^}]*text-align:left/);
-  assert.match(phone, /\.footer\{[^}]*padding:4rem var\(--pad\)/);
-  assert.match(phone, /\.footer-inner\{[^}]*grid-template-columns:1fr[^}]*gap:2\.25rem/);
-  assert.match(phone, /\.footer-email\{[^}]*overflow-wrap:anywhere/);
+  assert.match(phone, /\.footer\{[^}]*padding:6rem var\(--pad\) \.75rem/);
+  assert.match(phone, /\.footer-contact-link\{[^}]*overflow-wrap:anywhere/);
 });
 
 test("portrait tablets retain a two-column pager and inset taskbar", async () => {

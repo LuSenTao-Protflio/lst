@@ -32,3 +32,15 @@ test("Home hides the navigation from the footer visibility callback", async () =
   assert.match(home, /className=\{`nav \$\{outroActive \? "is-outro-hidden" : ""\}`\}/);
   assert.match(home, /<SiteFooter onActiveChange=\{setOutroActive\} \/>/);
 });
+
+test("outro CSS preserves the palette and implements editorial responsive behavior", async () => {
+  const css = await read("../src/styles.css");
+
+  assert.match(css, /\.nav\.is-outro-hidden\s*\{/);
+  assert.match(css, /\.footer-observer\s*\{/);
+  assert.match(css, /\.footer-info\s*\{/);
+  assert.match(css, /\.footer-contact-link:focus-visible\s*\{/);
+  assert.match(css, /\.footer-wordmark\s*\{[^}]*font-family:"Climate Crisis"/s);
+  assert.match(css, /@media\(max-width:800px\)[\s\S]*\.footer-info\s*\{[^}]*grid-template-columns:1fr/s);
+  assert.match(css, /@media\(prefers-reduced-motion:reduce\)[\s\S]*\.footer-info/s);
+});

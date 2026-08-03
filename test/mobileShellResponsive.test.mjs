@@ -58,11 +58,11 @@ test("coarse pointers keep every primary shell action at least 44px tall", async
 
   assert.match(
     coarsePointer,
-    /\.nav-link,\.nav-lang-btn,\.project-taskbar-back,\.prelude-enter-control,\.cover-enter-link,\.info-photo-contact-action,\.footer-email\{[^}]*min-height:44px/,
+    /\.nav-link,\.nav-lang-btn,\.project-taskbar-back,\.prelude-enter-control,\.cover-enter-link,\.info-photo-contact-action,\.footer-contact-link\{[^}]*min-height:44px/,
   );
   assert.match(
     coarsePointer,
-    /\.nav-link,\.project-taskbar-back,\.footer-email\{[^}]*display:inline-flex[^}]*align-items:center/,
+    /\.nav-link,\.project-taskbar-back,\.footer-contact-link\{[^}]*display:inline-flex[^}]*align-items:center/,
   );
   assert.match(
     coarsePointer,

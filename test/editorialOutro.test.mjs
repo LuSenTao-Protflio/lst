@@ -24,3 +24,11 @@ test("outro visibility uses an intersection observer and no continuous window sc
   assert.match(footer, /onActiveChange\?\.\(/);
   assert.doesNotMatch(footer, /window\.addEventListener\(["']scroll["']/);
 });
+
+test("Home hides the navigation from the footer visibility callback", async () => {
+  const home = await read("../src/pages/Home.jsx");
+
+  assert.match(home, /const \[outroActive, setOutroActive\] = useState\(false\)/);
+  assert.match(home, /className=\{`nav \$\{outroActive \? "is-outro-hidden" : ""\}`\}/);
+  assert.match(home, /<SiteFooter onActiveChange=\{setOutroActive\} \/>/);
+});

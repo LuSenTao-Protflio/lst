@@ -12,6 +12,7 @@ import useScrollActivatedFolder from "../hooks/useScrollActivatedFolder";
 export default function Home() {
   const { lang, setLang, t } = useLanguage();
   const [activeFolder, setActiveFolder] = useState(null);
+  const [outroActive, setOutroActive] = useState(false);
   const [hoverFolders, setHoverFolders] = useState(() => (
     typeof window !== "undefined"
     && typeof window.matchMedia === "function"
@@ -38,7 +39,7 @@ export default function Home() {
 
   return (
     <div className="app">
-      <nav className="nav">
+      <nav className={`nav ${outroActive ? "is-outro-hidden" : ""}`}>
         <span className="nav-logo">Lusen Tao</span>
         <div className="nav-links">
           <a href="#directory" className="nav-link">{t("nav.work")}</a>
@@ -254,7 +255,7 @@ export default function Home() {
         })}
       </section>
 
-      <SiteFooter />
+      <SiteFooter onActiveChange={setOutroActive} />
     </div>
   );
 }

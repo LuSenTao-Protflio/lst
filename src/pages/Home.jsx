@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import LightRays from "../components/LightRays";
 import projects from "../data/projects";
@@ -8,11 +8,17 @@ import photoImg from "../../assets/IMG_2345.webp";
 import SiteFooter from "../components/SiteFooter";
 import ProjectFolderReveal from "../components/ProjectFolderReveal";
 import useScrollActivatedFolder from "../hooks/useScrollActivatedFolder";
+import TextType from "../components/TextType";
+import FuzzyImage from "../components/FuzzyImage";
 
 export default function Home() {
   const { lang, setLang, t } = useLanguage();
   const [activeFolder, setActiveFolder] = useState(null);
   const [outroActive, setOutroActive] = useState(false);
+  const infoRef = useRef(null);
+  const infoInView = useInView(infoRef, { once: true, amount: 0.3 });
+  const reduceMotion = useReducedMotion();
+  const infoActive = reduceMotion || infoInView;
   const [hoverFolders, setHoverFolders] = useState(() => (
     typeof window !== "undefined"
     && typeof window.matchMedia === "function"
@@ -35,6 +41,20 @@ export default function Home() {
   useScrollActivatedFolder({
     enabled: !hoverFolders,
     onChange: setActiveFolder,
+  });
+
+  const infoRows = [
+    { key: "education", label: t("info.education.label"), value: t("info.education.value") },
+    { key: "experience", label: t("info.experience.label"), value: t("info.experience.value") },
+    { key: "tools", label: t("info.tools.label"), value: t("info.tools.value") },
+    { key: "contact", label: t("info.contact.label"), value: t("info.contact.value") },
+  ];
+  const infoTypingSpeed = lang === "zh" ? 16 : 14;
+  let infoTypingOffset = 360;
+  const scheduledInfoRows = infoRows.map((row) => {
+    const startDelay = infoTypingOffset;
+    infoTypingOffset += Array.from(row.value).length * infoTypingSpeed + 80;
+    return { ...row, startDelay };
   });
 
   return (
@@ -109,48 +129,53 @@ export default function Home() {
         </header>
 
         {/* ── Info ── */}
-        <section className="info" id="info">
-        <motion.div
-          className="info-layout"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7 }}
-        >
+        <section className="info" id="info" ref={infoRef}>
+        <div className={`info-layout${infoActive ? " is-active" : ""}`}>
           <div className="info-photo-wrap">
             <div className="info-photo">
-              <img src={photoImg} alt={t("hero.name")} />
-              <div className="info-photo-contact-card">
-                <span className="info-photo-avatar" aria-hidden="true">
-                  <img src={photoImg} alt="" />
-                </span>
-                <span className="info-photo-contact-copy">
-                  <strong>卢森涛</strong>
-                  <small>{lang === "zh" ? "视觉传达设计" : "Visual Communication Design"}</small>
-                </span>
-                <a href="#contact" className="info-photo-contact-action">{lang === "zh" ? "联系我" : "Contact"}</a>
-              </div>
+              <FuzzyImage
+                src={photoImg}
+                alt={t("hero.name")}
+                baseIntensity={0.2}
+                hoverIntensity={0.5}
+                enableHover
+              />
+              <div className="info-photo-wordmark" aria-label="LUSENTAO">LUSENTAO</div>
             </div>
           </div>
           <div className="info-cols">
-            <div className="info-row">
-              <span className="info-row-label">{t("info.education.label")}</span>
-              <span className="info-row-value">{t("info.education.value")}</span>
-            </div>
-            <div className="info-row">
-              <span className="info-row-label">{t("info.experience.label")}</span>
-              <span className="info-row-value">{t("info.experience.value")}</span>
-            </div>
-            <div className="info-row">
-              <span className="info-row-label">{t("info.tools.label")}</span>
-              <span className="info-row-value">{t("info.tools.value")}</span>
-            </div>
-            <div className="info-row">
-              <span className="info-row-label">{t("info.contact.label")}</span>
-              <span className="info-row-value">{t("info.contact.value")}</span>
-            </div>
+            {scheduledInfoRows.map((row) => (
+              <div
+                className="info-row"
+                key={`${lang}-${row.key}`}
+                style={{ "--info-row-delay": `${Math.max(0, row.startDelay - 120)}ms` }}
+              >
+                <motion.span
+                  className="info-row-label"
+                  initial={false}
+                  animate={{ opacity: infoActive ? 1 : 0, y: infoActive ? 0 : 8 }}
+                  transition={{
+                    duration: 0.28,
+                    delay: reduceMotion ? 0 : Math.max(0, row.startDelay / 1000 - 0.1),
+                    ease: [0.34, 1.56, 0.64, 1],
+                  }}
+                >
+                  {row.label}
+                </motion.span>
+                <TextType
+                  className="info-row-value"
+                  text={row.value}
+                  active={infoActive}
+                  typingSpeed={infoTypingSpeed}
+                  startDelay={row.startDelay}
+                  showCursor
+                  cursorCharacter="_"
+                  cursorBlinkDuration={0.5}
+                />
+              </div>
+            ))}
           </div>
-        </motion.div>
+        </div>
         </section>
       </section>
 

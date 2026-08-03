@@ -26,7 +26,7 @@ export default function ProjectChrome({ currentId }) {
         </Link>
       </nav>
 
-      <SiteFooter />
+      <SiteFooter editorial />
     </>
   );
 }

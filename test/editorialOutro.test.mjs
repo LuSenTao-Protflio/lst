@@ -46,15 +46,14 @@ test("outro CSS preserves the palette and implements editorial responsive behavi
   assert.match(css, /@media\(prefers-reduced-motion:reduce\)[\s\S]*\.footer-info/s);
 });
 
-test("only Home opts into the long editorial footer", async () => {
+test("Home and project pages use the long editorial footer", async () => {
   const footer = await read("../src/components/SiteFooter.jsx");
   const home = await read("../src/pages/Home.jsx");
   const projectChrome = await read("../src/components/ProjectChrome.jsx");
 
   assert.match(footer, /function SiteFooter\(\{ editorial = false, onActiveChange \}\)/);
   assert.match(home, /<SiteFooter editorial onActiveChange=\{setOutroActive\} \/>/);
-  assert.match(projectChrome, /<SiteFooter \/>/);
-  assert.doesNotMatch(projectChrome, /<SiteFooter editorial/);
+  assert.match(projectChrome, /<SiteFooter editorial \/>/);
 });
 
 test("the contact stage is revealed beneath the final project before the closing wordmark", async () => {

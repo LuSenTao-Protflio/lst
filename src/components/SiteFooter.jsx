@@ -8,7 +8,7 @@ export default function SiteFooter({ editorial = false, onActiveChange }) {
 
   useEffect(() => {
     const node = observerRef.current;
-    if (!editorial || !node || !onActiveChange) return undefined;
+    if (!editorial || !node) return undefined;
 
     const observer = new IntersectionObserver(
       ([entry]) => {

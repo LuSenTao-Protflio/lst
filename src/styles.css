@@ -308,6 +308,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .woof-explanation h1{font-size:clamp(1.8rem,3vw,3rem);line-height:1.05;letter-spacing:-.04em;text-wrap:balance}
 .woof-detail-en{margin-top:.7rem;font-size:.72rem;color:var(--muted)}
 .woof-detail-desc{margin-top:1.5rem;font-size:.78rem;line-height:1.85;color:var(--muted)}
+.project-context{display:grid;gap:1.15rem;margin-top:2rem}
+.project-context-item{padding-top:.8rem;border-top:1px solid var(--line)}
+.project-context-item span{font-size:.56rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.project-context-item h2{margin-top:.5rem;font-size:1rem;line-height:1.25;letter-spacing:-.015em}
+.project-context-item p{margin-top:.55rem;font-size:.7rem;line-height:1.75;color:var(--muted)}
 .woof-detail-meta{margin-top:2rem;border-top:1px solid var(--line)}
 .woof-detail-meta>div{display:grid;grid-template-columns:5.5rem 1fr;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--line);font-size:.64rem;line-height:1.5}
 .woof-detail-meta dt{font-weight:700}
@@ -363,6 +368,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .editorial-detail-aside h1{font-size:clamp(1.8rem,3vw,3rem);line-height:1.05;letter-spacing:-.04em;text-wrap:balance}
 .editorial-detail-en{margin-top:.7rem;font-size:.72rem;color:var(--muted)}
 .editorial-detail-desc{margin-top:2rem;font-size:.78rem;line-height:1.85;color:var(--muted)}
+.editorial-detail-aside .project-context{margin-top:2rem}
 .editorial-detail-meta{margin-top:3rem;border-top:1px solid var(--line)}
 .editorial-detail-meta>div{display:grid;grid-template-columns:5.5rem 1fr;gap:1rem;padding:.8rem 0;border-bottom:1px solid var(--line);font-size:.66rem;line-height:1.55}
 .editorial-detail-meta dt{font-weight:700}
@@ -421,6 +427,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .daily-reading-kicker{width:max-content;margin-bottom:1.35rem;font-size:.68rem;font-weight:750;line-height:1.45;background:linear-gradient(transparent 46%,rgba(255,208,0,.72) 46%)}
 .daily-reading-intro h1{max-width:11ch;font-size:clamp(2.8rem,6vw,6rem);font-weight:780;line-height:.96;letter-spacing:-.055em;text-wrap:balance}
 .daily-reading-lead{max-width:44rem;margin-top:2rem;font-size:clamp(.84rem,1vw,1rem);line-height:1.85;color:var(--muted)}
+.daily-reading-intro-copy .project-context{max-width:44rem;margin-top:2.5rem}
 .daily-reading-facts{border-top:1px solid var(--line)}
 .daily-reading-facts>div{display:grid;grid-template-columns:5.7rem minmax(0,1fr);gap:1rem;padding:.95rem 0;border-bottom:1px solid var(--line);font-size:.68rem;line-height:1.55}
 .daily-reading-facts dt{font-weight:700}

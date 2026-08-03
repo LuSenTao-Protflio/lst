@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import ProjectLabel from "./ProjectLabel";
+import ProjectContext from "./ProjectContext";
 
 const reveal = (reduceMotion, delay = 0) => ({
   initial: reduceMotion ? false : { opacity: 0, y: 24 },
@@ -38,6 +39,7 @@ export default function WoofProjectDetail({ project, projectT }) {
             <h1>{projectT.title}</h1>
             <p className="woof-detail-en">{projectT.en}</p>
             <p className="woof-detail-desc">{projectT.desc}</p>
+            <ProjectContext detail={detail} />
 
             <dl className="woof-detail-meta">
               {detail.meta.map((item) => (

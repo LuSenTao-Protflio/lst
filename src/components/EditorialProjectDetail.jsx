@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import ProjectLabel from "./ProjectLabel";
+import ProjectContext from "./ProjectContext";
 
 const reveal = (reduceMotion, delay = 0) => ({
   initial: reduceMotion ? false : { opacity: 0, y: 24 },
@@ -65,6 +66,7 @@ export default function EditorialProjectDetail({ project, projectT }) {
             <h1>{projectT.title}</h1>
             <p className="editorial-detail-en">{projectT.en}</p>
             <p className="editorial-detail-desc">{projectT.desc}</p>
+            <ProjectContext detail={detail} />
             <dl className="editorial-detail-meta">
               {detail.meta.map((item) => <div key={item.label}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}
             </dl>

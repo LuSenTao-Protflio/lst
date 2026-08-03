@@ -12,6 +12,7 @@ import themeMidday from "../assets/daily-reading/theme-midday.webp";
 import themeEvening from "../assets/daily-reading/theme-evening.webp";
 import schedule from "../assets/daily-reading/schedule.webp";
 import closingMark from "../assets/daily-reading/closing-mark.webp";
+import ProjectContext from "../components/ProjectContext";
 
 const copy = {
   zh: {
@@ -95,6 +96,7 @@ export default function DailyReading({ projectT }) {
           <p className="daily-reading-kicker">{pageCopy.role}</p>
           <h1 id="daily-reading-title">{projectT?.title || "天安云谷（日常）读书节"}</h1>
           <p className="daily-reading-lead">{projectT?.desc}</p>
+          <ProjectContext detail={projectT?.detail} />
         </Reveal>
         <Reveal as="dl" className="daily-reading-facts" delay={0.08}>
           {meta.map((item) => (
